@@ -1,0 +1,10 @@
+/* Footer */
+.footer li {
+    display: inline;
+    padding: 10px;
+}
+.footer ul { padding: 0; }
+.footer a {
+    text-decoration: none;
+    color: black;
+}

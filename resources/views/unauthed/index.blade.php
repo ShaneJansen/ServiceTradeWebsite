@@ -1,6 +1,6 @@
-@extends('layouts.unauthed')
+@extends('layouts.unauthed.main')
 
-@section('unauthed.body')
+@section('main.body')
     <div layout="row" layout-align="center center" layout-fill>
         <md-card flex-gt-sm="70" flex="100">
             <md-card-content>
