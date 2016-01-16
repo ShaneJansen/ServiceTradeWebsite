@@ -6,8 +6,8 @@ var module = angular.module('unauthedApp', [
 
 module.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('orange')
-        .accentPalette('deep-orange')
+        .primaryPalette('indigo') // #3F51B5
+        .accentPalette('blue') // #2196F3
         .warnPalette('red')
         .backgroundPalette('grey')
 });

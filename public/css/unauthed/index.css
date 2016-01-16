@@ -1,0 +1,16 @@
+.mainSection {
+    height: 500px;
+    background: url('/dist/images/background.jpg') no-repeat bottom;
+    background-size: cover;
+    width: 100%;
+    margin: 0;
+    color: whitesmoke;
+}
+#appName {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+#tagLine { font-size: 1.5em; }
+h2 {
+    margin-top: 0;
+}

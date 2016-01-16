@@ -1,12 +1,9 @@
 @extends('layouts.unauthed.main')
 
+@section('base.head')
+    <link rel="stylesheet" href="/css/unauthed/index.css">
+@stop
+
 @section('main.body')
-    <div layout="row" layout-align="center center" layout-fill>
-        <md-card flex-gt-sm="70" flex="100">
-            <md-card-content>
-                <h2>Header</h2>
-                content
-            </md-card-content>
-        </md-card>
-    </div>
+    @include('unauthed.index2')
 @stop
