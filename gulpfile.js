@@ -62,3 +62,4 @@ gulp.task('image', function () {
 
 
 gulp.task('default', ['sass', 'unauthed-js', 'authed-js', 'image'], function () {});
+gulp.task('no-image', ['sass', 'unauthed-js', 'authed-js'], function () {});
