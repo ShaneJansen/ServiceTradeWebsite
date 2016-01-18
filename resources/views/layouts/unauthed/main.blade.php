@@ -9,9 +9,7 @@
                 <div layout="column"> @include('layouts.footer') </div>
             </md-content>
             @section('base.bodyJavaScript')
-                <script src="/angular/unauthedApp.js"></script>
-                <script src="/angular/main/mainController.js"></script>
-                <script src="/angular/main/mainService.js"></script>
+                <script src="/dist/js/unauthed.js"></script>
             @stop
         </div>
     </div>

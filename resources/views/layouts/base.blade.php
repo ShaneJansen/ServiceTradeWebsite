@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="description" content="Get work done and improve your skills.">
-        <meta name="theme-color" content="#333333">
-        <title>ServiceTrade - Get work done and improve your skills.</title>
+        <meta name="description" content="Improve your skills and get work done.">
+        <meta name="theme-color" content="#3F51B5">
+        <title>ServiceTrade - Improve your skills and get work done.</title>
         @yield('base.headMeta')
         <!-- Stylesheets -->
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-        <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700">
+        <link rel="stylesheet" href="/dist/css/base.css">
         @yield('base.head')
     </head>
 

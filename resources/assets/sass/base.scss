@@ -1,0 +1,23 @@
+/* Variables */
+$primary-color: #3F51B5;
+$accent-color: #2196F3;
+$primary-font: 'Roboto Condensed', sans-serif;
+$text-color: #757575;
+
+body {
+    font-family: $primary-font;
+}
+
+md-content {
+    color: $text-color;
+}
+
+.focused { color: $accent-color; }
+
+/* Footer */
+.footer {
+    .md-primary {
+        padding: 0;
+        margin: 0;
+    }
+}

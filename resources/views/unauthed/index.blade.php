@@ -1,7 +1,7 @@
 @extends('layouts.unauthed.main')
 
 @section('base.head')
-    <link rel="stylesheet" href="/css/unauthed/index.css">
+    <link rel="stylesheet" href="/dist/css/unauthed/index.css">
 @stop
 
 @section('main.body')
