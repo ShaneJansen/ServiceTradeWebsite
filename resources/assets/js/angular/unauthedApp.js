@@ -20,6 +20,7 @@ UnauthedApp.prototype.initialize = function(UnauthedApp) {
 
 var module = angular.module('unauthedApp', [
     'ngMaterial',
-    'mainModule'
+    'mainModule',
+    'indexModule'
 ]);
 module.controller('UnauthedApp', [UnauthedApp]);

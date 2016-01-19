@@ -5,8 +5,10 @@ var gulp = require('gulp'),
     gp_sass = require('gulp-sass'),
     gp_sourcemaps = require('gulp-sourcemaps'),
     gp_minifycss = require('gulp-minify-css'),
-    gp_uglify = require('gulp-uglify');
+    gp_uglify = require('gulp-uglify'),
+    gp_if = require('gulp-if');
 var pngquant = require('imagemin-pngquant');
+var argv = require('yargs').argv;
 
 
 gulp.task('sass', function () {
@@ -24,10 +26,10 @@ gulp.task('unauthed-js', function () {
     return gulp.src(['resources/assets/js/angular/unauthedApp.js',
         'resources/assets/js/angular/main/**/*.js',
         'resources/assets/js/angular/unauthed/**/*.js'])
-        .pipe(gp_sourcemaps.init())
+        .pipe(gp_if(argv.dev, gp_sourcemaps.init()))
         .pipe(gp_concat('unauthed.js'))
         .pipe(gp_uglify())
-        .pipe(gp_sourcemaps.write())
+        .pipe(gp_if(argv.dev, gp_sourcemaps.write()))
         .pipe(gulp.dest('public/dist/js'));
 });
 gulp.task('unauthed-js:watch', function () {
@@ -39,10 +41,10 @@ gulp.task('authed-js', function () {
     return gulp.src(['resources/assets/js/angular/authedApp.js',
             'resources/assets/js/angular/main/**/*.js',
             'resources/assets/js/angular/authed/**/*.js'])
-        .pipe(gp_sourcemaps.init())
+        .pipe(gp_if(argv.dev, gp_sourcemaps.init()))
         .pipe(gp_concat('authed.js'))
         .pipe(gp_uglify())
-        .pipe(gp_sourcemaps.write())
+        .pipe(gp_if(argv.dev, gp_sourcemaps.write()))
         .pipe(gulp.dest('public/dist/js'));
 });
 gulp.task('authed-js:watch', function () {

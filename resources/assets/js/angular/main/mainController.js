@@ -22,4 +22,8 @@ MainController.prototype.initialSetup = function(MainService) {
 };
 
 var module = angular.module('mainModule', []);
-module.controller('MainController', ['$scope', 'MainService', MainController]);
+module.controller('MainController', [
+    '$scope',
+    'MainService',
+    MainController
+]);
