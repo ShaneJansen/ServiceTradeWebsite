@@ -5,38 +5,73 @@
 var IndexController = function ($mdDialog) {
     var self = this;
 
-    self.showLoginDialog = function ($event) {
+    self.showLoginDialog = function () {
         showLoginDialog($mdDialog);
+    };
+
+    self.showRegisterDialog = function () {
+        showRegisterDialog($mdDialog);
     };
 };
 
 
-var LoginDialogController = function ($controller, $mdDialog) {
+var LoginDialogController = function ($mdDialog) {
     var self = this;
+
+    self.creds = {
+        email: "",
+        password: ""
+    };
+
+    self.cancel = function () {
+        $mdDialog.cancel();
+    };
+    self.login = function () {
+        alert('Login with: ' + JSON.stringify(self.creds));
+    };
+};
+
+
+var RegisterDialogController = function ($mdDialog) {
+    var self = this;
+
+    self.creds = {
+        email: "",
+        password1: "",
+        password2: ""
+
+    };
 
     self.cancel = function () {
         $mdDialog.cancel();
     };
     self.register = function () {
-        $mdDialog.cancel();
-        // TODO
-        alert('Change to register');
-    };
-    self.login = function (result) {
-        showLoginDialog($mdDialog);
-        alert('Login with: ' + result);
+        alert('Register with: ' + JSON.stringify(self.creds));
     };
 };
 
 
 function showLoginDialog($mdDialog) {
     $mdDialog.show({
-            controller: 'LoginDialogController',
-            controllerAs: 'ctrl',
-            templateUrl: 'templates/dialogLogin.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true
-        });
+        controller: 'LoginDialogController',
+        controllerAs: 'ctrl',
+        templateUrl: 'templates/dialogLogin.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        closeTo: (document.querySelector('#login'))
+    });
+}
+
+
+function showRegisterDialog($mdDialog) {
+    $mdDialog.show({
+        controller: 'RegisterDialogController',
+        controllerAs: 'ctrl',
+        templateUrl: 'templates/dialogRegister.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        closeTo: (document.querySelector('#register'))
+    });
 }
 
 
@@ -46,7 +81,10 @@ module.controller('IndexController', [
     IndexController
 ]);
 module.controller('LoginDialogController', [
-    '$controller',
     '$mdDialog',
     LoginDialogController
+]);
+module.controller('RegisterDialogController', [
+    '$mdDialog',
+    RegisterDialogController
 ]);

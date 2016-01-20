@@ -1,8 +1,8 @@
-<md-dialog aria-label="login dialog" ng-cloak>
+<md-dialog aria-label="register dialog" ng-cloak>
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Log In</h2>
+                <h2>Register</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="ctrl.cancel()">
                     <i class="material-icons">close</i>
@@ -15,18 +15,29 @@
                     <label>Email</label>
                     <input ng-model="ctrl.creds.email" type="email">
                 </md-input-container>
+                <br>
                 <md-input-container>
                     <label>Password</label>
-                    <input ng-model="ctrl.creds.password" type="password">
+                    <input ng-model="ctrl.creds.password1" type="password">
+                </md-input-container>
+                <md-input-container>
+                    <label>Re-enter Password</label>
+                    <input ng-model="ctrl.creds.password2" type="password">
+                </md-input-container>
+                <br>
+                <md-input-container>
+                    <label>First Name</label>
+                    <input ng-model="ctrl.creds.firstName">
+                </md-input-container>
+                <md-input-container>
+                    <label>Last Name</label>
+                    <input ng-model="ctrl.creds.lastName">
                 </md-input-container>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button ng-click="ctrl.forgot()">
-                Forgot Password
-            </md-button>
             <span flex></span>
-            <md-button ng-click="ctrl.login()" style="margin-right:20px;">
+            <md-button ng-click="ctrl.login('creds here')" style="margin-right:20px;">
                 Log In
             </md-button>
         </md-dialog-actions>
