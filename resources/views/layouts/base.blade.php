@@ -3,6 +3,7 @@
     <head>
         <meta name="description" content="Improve your skills and get work done.">
         <meta name="theme-color" content="#3F51B5">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
         <title>ServiceTrade - Improve your skills and get work done.</title>
         @yield('base.headMeta')
         <!-- Stylesheets -->

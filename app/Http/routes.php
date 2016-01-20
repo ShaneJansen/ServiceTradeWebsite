@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('unauthed.index');
-});
-
-Route::get('faq', function () {
-    return view('unauthed.faq');
-});
+Route::get('/', function () { return view('unauthed.index'); });
+Route::get('faq', function () { return view('unauthed.faq'); });
+Route::get('about', function () { return view('unauthed.about'); });
+Route::get('contact', function () { return view('unauthed.contact'); });
