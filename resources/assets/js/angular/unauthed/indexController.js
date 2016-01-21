@@ -12,6 +12,10 @@ var IndexController = function ($mdDialog) {
     self.showRegisterDialog = function () {
         showRegisterDialog($mdDialog);
     };
+
+    self.showForgotDialog = function () {
+        showForgotDialog($mdDialog);
+    };
 };
 
 
@@ -25,6 +29,9 @@ var LoginDialogController = function ($mdDialog) {
 
     self.cancel = function () {
         $mdDialog.cancel();
+    };
+    self.forgot = function () {
+        showForgotDialog($mdDialog);
     };
     self.login = function () {
         alert('Login with: ' + JSON.stringify(self.creds));
@@ -48,6 +55,21 @@ var RegisterDialogController = function ($mdDialog) {
     self.register = function () {
         alert('Register with: ' + JSON.stringify(self.creds));
     };
+};
+
+var ForgotDialogController = function ($mdDialog) {
+    var self = this;
+
+    self.creds = {
+        email: ""
+    };
+
+    self.cancel = function () {
+        $mdDialog.cancel();
+    };
+    self.ok = function () {
+        alert('Forgot with: ' + JSON.stringify(self.creds));
+    }
 };
 
 
@@ -74,6 +96,16 @@ function showRegisterDialog($mdDialog) {
     });
 }
 
+function showForgotDialog($mdDialog) {
+    $mdDialog.show({
+        controller: 'ForgotDialogController',
+        controllerAs: 'ctrl',
+        templateUrl: 'templates/dialogForgot.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true
+    });
+}
+
 
 var module = angular.module('indexModule', ['ngMaterial']);
 module.controller('IndexController', [
@@ -87,4 +119,8 @@ module.controller('LoginDialogController', [
 module.controller('RegisterDialogController', [
     '$mdDialog',
     RegisterDialogController
+]);
+module.controller('ForgotDialogController', [
+    '$mdDialog',
+    ForgotDialogController
 ]);
