@@ -20,10 +20,10 @@ var IndexController = function ($mdDialog) {
 /*
     LoginDialogController
  */
-var LoginDialogController = function ($scope, $mdDialog, IndexService) {
+var LoginDialogController = function ($scope, $window, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, IndexService);
+    self.setBroadcastHandlers($scope, $window, MainService, IndexService);
     self.setClickHandlers($mdDialog, IndexService);
 };
 LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
@@ -36,28 +36,30 @@ LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexSer
         showForgotDialog($mdDialog);
     };
     self.login = function () {
+        self.showProgress = true;
         IndexService.apiAuthUser();
     };
 };
-LoginDialogController.prototype.setBroadcastHandlers = function ($scope, IndexService) {
+LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window, MainService, IndexService) {
     var self = this;
 
     $scope.$on('handlerAuthedUser', function() {
-        // TODO
-        alert("REDIRECT WITH: " + IndexService.getCreds());
+        var params = buildUrlParams(IndexService.getLoginCreds());
+        $window.location.href = '/home' + params;
     });
     $scope.$on('handlerFailedAuthUser', function() {
-        self.error = IndexService.getError();
+        self.showProgress = false;
+        self.error = MainService.arrayToNl(IndexService.getLoginError());
     });
 
-    self.creds = IndexService.getCreds();
+    self.creds = IndexService.getLoginCreds();
 };
 
 /* RegisterDialogController */
-var RegisterDialogController = function ($scope, $mdDialog, IndexService) {
+var RegisterDialogController = function ($scope, $window, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, IndexService);
+    self.setBroadcastHandlers($scope, $window, MainService, IndexService);
     self.setClickHandlers($mdDialog, IndexService);
 };
 RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
@@ -67,22 +69,23 @@ RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, Index
         $mdDialog.cancel();
     };
     self.register = function () {
-        alert('Register with: ' + JSON.stringify(self.creds));
+        self.showProgress = true;
         IndexService.apiCreateUser();
     };
 };
-RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, IndexService) {
+RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $window, MainService, IndexService) {
     var self = this;
 
     $scope.$on('handlerCreatedUser', function() {
-        // TODO
-        alert("REDIRECT WITH: " + JSON.stringify(IndexService.getCreds()));
+        var params = buildUrlParams(IndexService.getRegisterCreds());
+        $window.location.href = '/home' + params;
     });
     $scope.$on('handlerFailedCreateUser', function() {
-        self.error = IndexService.getError();
+        self.showProgress = false;
+        self.error = MainService.arrayToNl(IndexService.getRegisterError());
     });
 
-    self.creds = IndexService.getCreds();
+    self.creds = IndexService.getRegisterCreds();
 };
 
 /* FormatDialogController */
@@ -133,6 +136,16 @@ function showForgotDialog($mdDialog) {
         clickOutsideToClose: true
     });
 }
+function buildUrlParams(creds) {
+    var builder = "";
+    builder += ("?id=" + creds.id);
+    builder += ("&firstName=" + creds.firstName);
+    builder += ("&lastName=" + creds.lastName);
+    builder += ("&email=" + creds.email);
+    builder += ("&token=" + creds.token);
+    builder += ("&verified=" + creds.verified);
+    return builder;
+}
 
 /*
     Modules
@@ -144,13 +157,17 @@ module.controller('IndexController', [
 ]);
 module.controller('LoginDialogController', [
     '$scope',
+    '$window',
     '$mdDialog',
+    'MainService',
     'IndexService',
     LoginDialogController
 ]);
 module.controller('RegisterDialogController', [
     '$scope',
+    '$window',
     '$mdDialog',
+    'MainService',
     'IndexService',
     RegisterDialogController
 ]);

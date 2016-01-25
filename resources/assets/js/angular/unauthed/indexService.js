@@ -4,15 +4,33 @@
 
 var IndexServiceFtn = function ($http, $rootScope, MainService) {
     var IndexService = {};
-    IndexService.data = {};
-    IndexService.data.creds = {};
+    IndexService.data = {
+        login: {
+            creds: {},
+            error: {}
+        },
+        register: {
+            creds: {},
+            error: {}
+        }
+    };
+    /*IndexService.data.login.creds = {};
+    IndexService.data.login.error = {};
+    IndexService.data.register.creds = {};
+    IndexService.data.register.error = {};*/
 
     // Data
-    IndexService.getCreds = function() {
-        return IndexService.data.creds;
+    IndexService.getLoginCreds = function() {
+        return IndexService.data.login.creds;
     };
-    IndexService.getError = function() {
-        return IndexService.data.error;
+    IndexService.getLoginError = function() {
+        return IndexService.data.login.error;
+    };
+    IndexService.getRegisterCreds = function() {
+        return IndexService.data.register.creds;
+    };
+    IndexService.getRegisterError = function() {
+        return IndexService.data.register.error;
     };
 
     // Network requests
@@ -20,12 +38,17 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
         $http({
             url: MainService.getApiUrl() + 'user',
             method: "POST",
-            data: IndexService.getCreds()
+            data: {
+                firstName: IndexService.data.register.creds.firstName,
+                lastName: IndexService.data.register.creds.lastName,
+                email: IndexService.data.register.creds.email,
+                password: IndexService.data.register.creds.password
+            }
         }).then(function successCallback(response) {
-            IndexService.data.creds = response.data;
+            IndexService.data.register.creds = response.data;
             $rootScope.$broadcast('handlerCreatedUser');
         }, function errorCallback(response) {
-            IndexService.data.error = response.data;
+            IndexService.data.register.error = response.data;
             $rootScope.$broadcast('handlerFailedCreateUser');
         });
     };
@@ -34,14 +57,14 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
             url: MainService.getApiUrl() + 'user/auth',
             method: "POST",
             data: {
-                email: IndexService.data.creds.email,
-                password: IndexService.data.creds.password
+                email: IndexService.data.login.creds.email,
+                password: IndexService.data.login.creds.password
             }
         }).then(function successCallback(response) {
-            IndexService.data.creds = response.data;
+            IndexService.data.login.creds = response.data;
             $rootScope.$broadcast('handlerAuthedUser');
         }, function errorCallback(response) {
-            IndexService.data.error = response.data;
+            IndexService.data.login.error = response.data;
             $rootScope.$broadcast('handlerFailedAuthUser');
         });
     };

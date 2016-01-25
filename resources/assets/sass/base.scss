@@ -15,9 +15,17 @@ md-content {
 
 .focused { color: $accent-color; }
 
+.form-error {
+    color: $warn-color;
+    font-size: 16px;
+}
 .input-error {
     color: $warn-color;
     font-size: 12px;
+}
+
+.angular-with-nl {
+    white-space: pre-wrap;
 }
 
 /* Footer */

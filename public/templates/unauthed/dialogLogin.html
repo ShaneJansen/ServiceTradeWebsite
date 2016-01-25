@@ -20,7 +20,10 @@
                     <input ng-model="ctrl.creds.password" ng-required="true" type="password">
                 </md-input-container>
                 <br>
-                <span class="error">{{ ctrl.error }}</span>
+                <div layout="column" layout-align="center center">
+                    <md-progress-circular ng-show="ctrl.showProgress" md-mode="indeterminate"></md-progress-circular>
+                    <span ng-show="!ctrl.showProgress" class="form-error angular-with-nl">{{ ctrl.error }}</span>
+                </div>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
