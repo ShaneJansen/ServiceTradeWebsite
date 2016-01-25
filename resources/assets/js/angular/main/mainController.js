@@ -2,10 +2,10 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var MainController = function($scope, MainService) {
+var MainController = function($scope, $location, MainService) {
     var self = this;
 
-    self.initialSetup(MainService);
+    self.initialSetup($location, MainService);
     self.appName = MainService.getAppName();
 };
 
@@ -13,17 +13,20 @@ var MainController = function($scope, MainService) {
  * Sets the initial and default variables/values used
  * throughout the current application.
  */
-MainController.prototype.initialSetup = function(MainService) {
+MainController.prototype.initialSetup = function($location, MainService) {
     // jQuery no conflict
     //$.noConflict();
 
-    MainService.setApiVersion('v1');
+    var apiUrl = $location.protocol() + '://api.' +  $location.host() + '/';
+
+    MainService.setApiUrl(apiUrl);
     MainService.setAppName('ServiceTrade');
 };
 
 var module = angular.module('mainModule', []);
 module.controller('MainController', [
     '$scope',
+    '$location',
     'MainService',
     MainController
 ]);

@@ -1,5 +1,5 @@
 <md-dialog aria-label="register dialog" ng-cloak>
-    <form>
+    <form name="form">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Register</h2>
@@ -13,31 +13,39 @@
             <div class="md-dialog-content">
                 <md-input-container>
                     <label>Email</label>
-                    <input ng-model="ctrl.creds.email" type="email">
+                    <input ng-model="ctrl.creds.email" ng-required="true" type="email">
                 </md-input-container>
                 <br>
                 <md-input-container>
                     <label>Password</label>
-                    <input ng-model="ctrl.creds.password1" type="password">
+                    <input name="password" type="password" ng-model="ctrl.creds.password" ng-required="true" ng-minlength="5">
+                    <div ng-messages>
+                        <span class="input-error" ng-show="form.password.$dirty && form.password.$invalid">Must be at least 5 characters.</span>
+                    </div>
                 </md-input-container>
                 <md-input-container>
                     <label>Re-enter Password</label>
-                    <input ng-model="ctrl.creds.password2" type="password">
+                    <input name="password2" type="password" ng-model="ctrl.creds.password2" equals="{{ ctrl.creds.password }}" ng-required="true">
+                    <div ng-messages>
+                        <span class="input-error" ng-show="form.password.$dirty && form.password2.$invalid">Passwords do not match.</span>
+                    </div>
                 </md-input-container>
                 <br>
                 <md-input-container>
                     <label>First Name</label>
-                    <input ng-model="ctrl.creds.firstName">
+                    <input ng-model="ctrl.creds.firstName" ng-required="true">
                 </md-input-container>
                 <md-input-container>
                     <label>Last Name</label>
-                    <input ng-model="ctrl.creds.lastName">
+                    <input ng-model="ctrl.creds.lastName" ng-required="true">
                 </md-input-container>
+                <br>
+                <span class="error">{{ ctrl.error }}</span>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button ng-click="ctrl.register('creds here')" style="margin-right:20px;">
+            <md-button style="margin-right:20px;" ng-click="ctrl.register('creds here')" ng-disabled="form.$invalid">
                 Register
             </md-button>
         </md-dialog-actions>

@@ -7,10 +7,10 @@ var MainServiceFtn = function ($http, $rootScope) {
     MainService.data = {};
 
     // Application Globals
-    MainService.getApiVersion = function() {
+    MainService.getApiUrl = function() {
         return MainService.data.apiVersion;
     };
-    MainService.setApiVersion = function(apiVersion) {
+    MainService.setApiUrl = function(apiVersion) {
         MainService.data.apiVersion = apiVersion;
     };
     MainService.getAppName = function() {

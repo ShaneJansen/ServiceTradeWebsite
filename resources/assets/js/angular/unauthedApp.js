@@ -13,7 +13,7 @@ UnauthedApp.prototype.initialize = function(UnauthedApp) {
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo') // #3F51B5
             .accentPalette('blue') // #2196F3
-            .warnPalette('red')
+            .warnPalette('red') // #F44336
             .backgroundPalette('grey')
     });
 };

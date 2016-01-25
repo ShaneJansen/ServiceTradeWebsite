@@ -1,6 +1,7 @@
 /* Variables */
 $primary-color: #3F51B5;
 $accent-color: #2196F3;
+$warn-color: #F44336;
 $primary-font: 'Roboto Condensed', sans-serif;
 $text-color: #757575;
 
@@ -13,6 +14,11 @@ md-content {
 }
 
 .focused { color: $accent-color; }
+
+.input-error {
+    color: $warn-color;
+    font-size: 12px;
+}
 
 /* Footer */
 .footer {

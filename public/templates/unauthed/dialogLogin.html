@@ -1,5 +1,5 @@
 <md-dialog aria-label="login dialog" ng-cloak>
-    <form>
+    <form name="form">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Log In</h2>
@@ -13,12 +13,14 @@
             <div class="md-dialog-content">
                 <md-input-container>
                     <label>Email</label>
-                    <input ng-model="ctrl.creds.email" type="email">
+                    <input ng-model="ctrl.creds.email" ng-required="true" type="email">
                 </md-input-container>
                 <md-input-container>
                     <label>Password</label>
-                    <input ng-model="ctrl.creds.password" type="password">
+                    <input ng-model="ctrl.creds.password" ng-required="true" type="password">
                 </md-input-container>
+                <br>
+                <span class="error">{{ ctrl.error }}</span>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
@@ -26,7 +28,7 @@
                 Forgot Password
             </md-button>
             <span flex></span>
-            <md-button ng-click="ctrl.login()" style="margin-right:20px;">
+            <md-button ng-click="ctrl.login()" ng-disabled="form.$invalid" style="margin-right:20px;">
                 Log In
             </md-button>
         </md-dialog-actions>
