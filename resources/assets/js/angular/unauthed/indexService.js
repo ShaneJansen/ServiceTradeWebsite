@@ -7,36 +7,23 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     IndexService.data = {
         login: {
             creds: {},
-            error: {}
+            error: ""
         },
         register: {
             creds: {},
-            error: {}
+            error: ""
         }
     };
-    /*IndexService.data.login.creds = {};
-    IndexService.data.login.error = {};
-    IndexService.data.register.creds = {};
-    IndexService.data.register.error = {};*/
 
-    // Data
-    IndexService.getLoginCreds = function() {
-        return IndexService.data.login.creds;
-    };
-    IndexService.getLoginError = function() {
-        return IndexService.data.login.error;
-    };
-    IndexService.getRegisterCreds = function() {
-        return IndexService.data.register.creds;
-    };
-    IndexService.getRegisterError = function() {
-        return IndexService.data.register.error;
+    // Getters and setters
+    IndexService.getData = function() {
+        return IndexService.data;
     };
 
     // Network requests
     IndexService.apiCreateUser = function() {
         $http({
-            url: MainService.getApiUrl() + 'user',
+            url: MainService.getData().apiUrl + 'user',
             method: "POST",
             data: {
                 firstName: IndexService.data.register.creds.firstName,
@@ -54,7 +41,7 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     };
     IndexService.apiAuthUser = function() {
         $http({
-            url: MainService.getApiUrl() + 'user/auth',
+            url: MainService.getData().apiUrl + 'user/auth',
             method: "POST",
             data: {
                 email: IndexService.data.login.creds.email,

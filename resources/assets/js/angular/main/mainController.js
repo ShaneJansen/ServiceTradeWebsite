@@ -2,18 +2,19 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var MainController = function($scope, $location, MainService) {
+var MainController = function($scope, $location, $mdSidenav, MainService) {
     var self = this;
 
-    self.initialSetup($location, MainService);
-    self.appName = MainService.getAppName();
+    self.initialize($location, MainService);
+    self.setClickHandlers($mdSidenav);
+    self.data = MainService.getData();
 };
 
 /**
  * Sets the initial and default variables/values used
  * throughout the current application.
  */
-MainController.prototype.initialSetup = function($location, MainService) {
+MainController.prototype.initialize = function($location, MainService) {
     // jQuery no conflict
     //$.noConflict();
 
@@ -21,12 +22,22 @@ MainController.prototype.initialSetup = function($location, MainService) {
 
     MainService.setApiUrl(apiUrl);
     MainService.setAppName('ServiceTrade');
+    MainService.setToolbarTitle(MainService.getData().appName);
+};
+
+MainController.prototype.setClickHandlers = function($mdSidenav) {
+    var self = this;
+
+    self.toggleSidenav = function(menuId) {
+        $mdSidenav(menuId).toggle();
+    };
 };
 
 var module = angular.module('mainModule', []);
 module.controller('MainController', [
     '$scope',
     '$location',
+    '$mdSidenav',
     'MainService',
     MainController
 ]);

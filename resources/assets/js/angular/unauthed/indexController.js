@@ -44,15 +44,15 @@ LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window
     var self = this;
 
     $scope.$on('handlerAuthedUser', function() {
-        var params = buildUrlParams(IndexService.getLoginCreds());
+        var params = buildUrlParams(IndexService.getData().login.creds);
         $window.location.href = '/home' + params;
     });
     $scope.$on('handlerFailedAuthUser', function() {
         self.showProgress = false;
-        self.error = MainService.arrayToNl(IndexService.getLoginError());
+        self.data.error = MainService.arrayToNl(self.data.error);
     });
 
-    self.creds = IndexService.getLoginCreds();
+    self.data = IndexService.getData().login;
 };
 
 /* RegisterDialogController */
@@ -77,30 +77,26 @@ RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $win
     var self = this;
 
     $scope.$on('handlerCreatedUser', function() {
-        var params = buildUrlParams(IndexService.getRegisterCreds());
+        var params = buildUrlParams(IndexService.getData().register.creds);
         $window.location.href = '/home' + params;
     });
     $scope.$on('handlerFailedCreateUser', function() {
         self.showProgress = false;
-        self.error = MainService.arrayToNl(IndexService.getRegisterError());
+        self.data.error = MainService.arrayToNl(self.data.error);
     });
 
-    self.creds = IndexService.getRegisterCreds();
+    self.data = IndexService.getData().register;
 };
 
 /* FormatDialogController */
 var ForgotDialogController = function ($mdDialog) {
     var self = this;
 
-    self.creds = {
-        email: ""
-    };
-
     self.cancel = function () {
         $mdDialog.cancel();
     };
     self.ok = function () {
-        alert('Forgot with: ' + JSON.stringify(self.creds));
+        alert('Forgot with: ' + JSON.stringify(self.data.creds));
     }
 };
 

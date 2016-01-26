@@ -4,20 +4,24 @@
 
 var MainServiceFtn = function () {
     var MainService = {};
-    MainService.data = {};
+    MainService.data = {
+        apiUrl: {},
+        appName: {},
+        toolbarTitle: {}
+    };
 
-    // Application Globals
-    MainService.getApiUrl = function() {
-        return MainService.data.apiVersion;
+    // Getters and setters
+    MainService.getData = function() {
+        return MainService.data;
     };
-    MainService.setApiUrl = function(apiVersion) {
-        MainService.data.apiVersion = apiVersion;
-    };
-    MainService.getAppName = function() {
-        return MainService.data.appName;
+    MainService.setApiUrl = function(apiUrl) {
+        MainService.data.apiUrl = apiUrl;
     };
     MainService.setAppName = function(appName) {
         MainService.data.appName = appName;
+    };
+    MainService.setToolbarTitle = function(toolbarTitle) {
+        MainService.data.toolbarTitle = toolbarTitle;
     };
 
     // Helper methods

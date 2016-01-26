@@ -5,5 +5,5 @@
 @stop
 
 @section('main.body')
-    <div ng-view></div>
+    @include('authed.index2')
 @stop

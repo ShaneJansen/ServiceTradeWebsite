@@ -13,16 +13,16 @@
             <div class="md-dialog-content">
                 <md-input-container>
                     <label>Email</label>
-                    <input ng-model="ctrl.creds.email" ng-required="true" type="email">
+                    <input ng-model="ctrl.data.creds.email" ng-required="true" type="email">
                 </md-input-container>
                 <md-input-container>
                     <label>Password</label>
-                    <input ng-model="ctrl.creds.password" ng-required="true" type="password">
+                    <input ng-model="ctrl.data.creds.password" ng-required="true" type="password">
                 </md-input-container>
                 <br>
                 <div layout="column" layout-align="center center">
                     <md-progress-circular ng-show="ctrl.showProgress" md-mode="indeterminate"></md-progress-circular>
-                    <span ng-show="!ctrl.showProgress" class="form-error angular-with-nl">{{ ctrl.error }}</span>
+                    <span ng-show="!ctrl.showProgress" class="form-error angular-with-nl">{{ ctrl.data.error }}</span>
                 </div>
             </div>
         </md-dialog-content>

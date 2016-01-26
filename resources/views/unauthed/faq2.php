@@ -3,7 +3,7 @@
         <md-card-content>
             <ol>
                 <li>
-                    <span class="focused">Is {{ main.appName }} really free?</span>
+                    <span class="focused">Is {{ main.data.appName }} really free?</span>
                     <br>
                     Yes it's completely free!
                 </li>
