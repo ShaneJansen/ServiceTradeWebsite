@@ -20,10 +20,10 @@ var IndexController = function ($mdDialog) {
 /*
     LoginDialogController
  */
-var LoginDialogController = function ($scope, $window, $mdDialog, MainService, IndexService) {
+var LoginDialogController = function ($scope, $window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, $window, MainService, IndexService);
+    self.setBroadcastHandlers($scope, $window, $cookies, MainService, IndexService);
     self.setClickHandlers($mdDialog, IndexService);
 };
 LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
@@ -40,12 +40,13 @@ LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexSer
         IndexService.apiAuthUser();
     };
 };
-LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window, MainService, IndexService) {
+LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window, $cookies, MainService, IndexService) {
     var self = this;
 
     $scope.$on('handlerAuthedUser', function() {
-        var params = buildUrlParams(IndexService.getData().login.creds);
-        $window.location.href = '/home' + params;
+        var creds = IndexService.getData().login.creds;
+        setUserCreds($cookies, creds);
+        $window.location.href = '/home';
     });
     $scope.$on('handlerFailedAuthUser', function() {
         self.showProgress = false;
@@ -56,10 +57,10 @@ LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window
 };
 
 /* RegisterDialogController */
-var RegisterDialogController = function ($scope, $window, $mdDialog, MainService, IndexService) {
+var RegisterDialogController = function ($scope, $window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, $window, MainService, IndexService);
+    self.setBroadcastHandlers($scope, $window, $cookies, MainService, IndexService);
     self.setClickHandlers($mdDialog, IndexService);
 };
 RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
@@ -73,12 +74,13 @@ RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, Index
         IndexService.apiCreateUser();
     };
 };
-RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $window, MainService, IndexService) {
+RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $window, $cookies, MainService, IndexService) {
     var self = this;
 
     $scope.$on('handlerCreatedUser', function() {
-        var params = buildUrlParams(IndexService.getData().register.creds);
-        $window.location.href = '/home' + params;
+        var creds = IndexService.getData().register.creds;
+        setUserCreds($cookies, creds);
+        $window.location.href = '/home';
     });
     $scope.$on('handlerFailedCreateUser', function() {
         self.showProgress = false;
@@ -132,21 +134,19 @@ function showForgotDialog($mdDialog) {
         clickOutsideToClose: true
     });
 }
-function buildUrlParams(creds) {
-    var builder = "";
-    builder += ("?id=" + creds.id);
-    builder += ("&firstName=" + creds.firstName);
-    builder += ("&lastName=" + creds.lastName);
-    builder += ("&email=" + creds.email);
-    builder += ("&token=" + creds.token);
-    builder += ("&verified=" + creds.verified);
-    return builder;
+function setUserCreds($cookies, creds) {
+    $cookies.put('userId', creds.id);
+    $cookies.put('userFirstName', creds.firstName);
+    $cookies.put('userLastName', creds.lastName);
+    $cookies.put('userEmail', creds.email);
+    $cookies.put('userToken', creds.token);
+    $cookies.put('userVerified', creds.verified);
 }
 
 /*
     Modules
  */
-var module = angular.module('indexModule', ['ngMaterial', 'mainModule']);
+var module = angular.module('indexModule', ['ngCookies', 'ngMaterial', 'mainModule']);
 module.controller('IndexController', [
     '$mdDialog',
     IndexController
@@ -154,6 +154,7 @@ module.controller('IndexController', [
 module.controller('LoginDialogController', [
     '$scope',
     '$window',
+    '$cookies',
     '$mdDialog',
     'MainService',
     'IndexService',
@@ -162,6 +163,7 @@ module.controller('LoginDialogController', [
 module.controller('RegisterDialogController', [
     '$scope',
     '$window',
+    '$cookies',
     '$mdDialog',
     'MainService',
     'IndexService',

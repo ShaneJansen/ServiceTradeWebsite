@@ -22,6 +22,7 @@ var module = angular.module('authedApp', [
     'ngRoute',
     'ngMaterial',
     'mainModule',
+    'authedModule',
     'dashboardModule'
 ]);
 module.controller('AuthedApp', [AuthedApp]);
@@ -37,6 +38,11 @@ module.config(['$routeProvider',
         when('/skills', {
             templateUrl: '/templates/authed/skills.html',
             controller: 'SkillsController',
+            controllerAs: 'skills'
+        }).
+        when('/settings', {
+            templateUrl: '/templates/authed/settings.html',
+            controller: 'SettingsController',
             controllerAs: 'skills'
         }).
         otherwise({

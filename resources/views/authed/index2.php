@@ -11,7 +11,7 @@
         </md-toolbar>
         <md-list>
             <md-list-item>
-                <a md-ink-ripple layout="row" layout-align="start center" flex>
+                <a href="#/" md-ink-ripple layout="row" layout-align="start center" flex>
                         <div class="inset">
                             <i class="material-icons">dashboard</i>
                         </div>
@@ -21,7 +21,7 @@
             <md-divider></md-divider>
             <md-subheader>Account</md-subheader>
             <md-list-item>
-                <a md-ink-ripple layout="row" layout-align="start center" flex>
+                <a href="#/settings" md-ink-ripple layout="row" layout-align="start center" flex>
                     <div class="inset">
                         <i class="material-icons">settings</i>
                     </div>
