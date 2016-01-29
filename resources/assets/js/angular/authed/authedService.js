@@ -12,7 +12,8 @@ var AuthedServiceFtn = function () {
             email: '',
             token: '',
             verified: ''
-        }
+        },
+        toolbarTitle: ''
     };
 
     // Getters and setters
@@ -36,6 +37,9 @@ var AuthedServiceFtn = function () {
     };
     AuthedService.setUserVerified = function (verified) {
         AuthedService.data.user.verified = verified;
+    };
+    AuthedService.setToolbarTitle = function (toolbarTitle) {
+        AuthedService.data.toolbarTitle = toolbarTitle;
     };
 
     // Functions

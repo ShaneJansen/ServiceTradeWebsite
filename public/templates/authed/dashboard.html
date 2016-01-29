@@ -1,2 +1,64 @@
-dashboard<br>
-{{ main.test }}
+<div layout="column">
+
+    <div layout="row" layout-align="center center">
+        <md-card flex-gt-sm="70" flex="100">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Availability</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-switch class="md-primary" ng-model="dashboard.data.available">
+                    <span ng-hide="dashboard.data.available">Not </span>Available for Jobs
+                </md-switch>
+                <div class="animate-hide" ng-hide="!dashboard.data.available">
+                    <ul>
+                        <li>
+                            Active Jobs
+                        </li>
+                        <li>
+                            Active Jobs
+                        </li>
+                        <li>
+                            Active Jobs
+                        </li>
+                        <li>
+                            Active Jobs
+                        </li>
+                        <li>
+                            Active Jobs
+                        </li>
+                        <li>
+                            Active Jobs
+                        </li>
+                    </ul>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div layout="row" layout-align="center center">
+        <md-card flex-gt-sm="70" flex="100">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Stats</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <ul>
+                    <li>
+                        2 Jobs in Progress
+                    </li>
+                    <br>
+                    <li>
+                        3 Jobs Waiting Approval
+                    </li>
+                    <br>
+                    <li>
+                        10 Completed Jobs
+                    </li>
+                </ul>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

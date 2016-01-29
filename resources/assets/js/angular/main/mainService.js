@@ -5,9 +5,8 @@
 var MainServiceFtn = function () {
     var MainService = {};
     MainService.data = {
-        apiUrl: {},
-        appName: {},
-        toolbarTitle: {}
+        apiUrl: '',
+        appName: ''
     };
 
     // Getters and setters
@@ -19,9 +18,6 @@ var MainServiceFtn = function () {
     };
     MainService.setAppName = function(appName) {
         MainService.data.appName = appName;
-    };
-    MainService.setToolbarTitle = function(toolbarTitle) {
-        MainService.data.toolbarTitle = toolbarTitle;
     };
 
     // Helper methods

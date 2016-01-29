@@ -12,9 +12,6 @@ var IndexController = function ($mdDialog, IndexService) {
     self.showRegisterDialog = function () {
         IndexService.showRegisterDialog($mdDialog);
     };
-    self.showForgotDialog = function () {
-        IndexService.showForgotDialog($mdDialog);
-    };
 };
 
 /*
@@ -33,7 +30,7 @@ LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexSer
         $mdDialog.cancel();
     };
     self.forgot = function () {
-        showForgotDialog($mdDialog);
+        IndexService.showForgotDialog($mdDialog);
     };
     self.login = function () {
         self.showProgress = true;
@@ -79,7 +76,7 @@ RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $win
 
     $scope.$on('handlerCreatedUser', function() {
         var creds = IndexService.getData().register.creds;
-        setUserCreds($cookies, creds);
+        IndexService.setUserCreds($cookies, creds);
         $window.location.href = '/home';
     });
     $scope.$on('handlerFailedCreateUser', function() {

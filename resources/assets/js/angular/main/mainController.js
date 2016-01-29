@@ -22,7 +22,6 @@ MainController.prototype.initialize = function($location, MainService) {
 
     MainService.setApiUrl(apiUrl);
     MainService.setAppName('ServiceTrade');
-    MainService.setToolbarTitle(MainService.getData().appName);
 };
 
 MainController.prototype.setClickHandlers = function($mdSidenav) {

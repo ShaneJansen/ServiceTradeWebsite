@@ -2,21 +2,23 @@
  * Created by Shane Jansen on 1/25/16.
  */
 
-var DashboardController = function (MainService, AuthedService) {
+var DashboardController = function ($scope, AuthedService) {
     var self = this;
 
-    self.initialize(MainService);
+    self.initialize($scope, AuthedService);
 };
 
-DashboardController.prototype.initialize = function (MainService) {
+DashboardController.prototype.initialize = function ($scope, AuthedService) {
     var self = this;
 
-    MainService.setToolbarTitle('Dashboard');
+    $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
+        AuthedService.setToolbarTitle('Dashboard');
+    });
 };
 
 var module = angular.module('dashboardModule', ['ngMaterial']);
 module.controller('DashboardController', [
-    'MainService',
+    '$scope',
     'AuthedService',
     DashboardController
 ]);

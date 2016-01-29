@@ -23,7 +23,9 @@ var module = angular.module('authedApp', [
     'ngMaterial',
     'mainModule',
     'authedModule',
-    'dashboardModule'
+    'dashboardModule',
+    'settingsModule',
+    'skillsModule'
 ]);
 module.controller('AuthedApp', [AuthedApp]);
 
@@ -44,8 +46,5 @@ module.config(['$routeProvider',
             templateUrl: '/templates/authed/settings.html',
             controller: 'SettingsController',
             controllerAs: 'skills'
-        }).
-        otherwise({
-            redirectTo: '/'
-        });
+        })
     }]);
