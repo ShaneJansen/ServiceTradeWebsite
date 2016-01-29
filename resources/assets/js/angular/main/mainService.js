@@ -26,10 +26,10 @@ var MainServiceFtn = function () {
 
     // Helper methods
     MainService.arrayToNl = function(orig) {
-        var builder = "";
+        var builder = '';
         var i;
         for (i=0; i<orig.length; i++) {
-            if (i == orig.length-1) builder += orig[i]
+            if (i == orig.length-1) builder += orig[i];
             else builder += orig[i] + '\n';
         }
         return builder;

@@ -6,12 +6,16 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     var IndexService = {};
     IndexService.data = {
         login: {
-            creds: {},
-            error: ""
+            creds: {
+                // TODO
+                email: 'sjjansen100@gmail.com',
+                password: 'mypass'
+            },
+            error: ''
         },
         register: {
             creds: {},
-            error: ""
+            error: ''
         }
     };
 
@@ -24,7 +28,7 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     IndexService.apiCreateUser = function() {
         $http({
             url: MainService.getData().apiUrl + 'user',
-            method: "POST",
+            method: 'POST',
             data: {
                 firstName: IndexService.data.register.creds.firstName,
                 lastName: IndexService.data.register.creds.lastName,
@@ -42,7 +46,7 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     IndexService.apiAuthUser = function() {
         $http({
             url: MainService.getData().apiUrl + 'user/auth',
-            method: "POST",
+            method: 'POST',
             data: {
                 email: IndexService.data.login.creds.email,
                 password: IndexService.data.login.creds.password
@@ -54,6 +58,45 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
             IndexService.data.login.error = response.data;
             $rootScope.$broadcast('handlerFailedAuthUser');
         });
+    };
+
+    // Functions
+    IndexService.showLoginDialog = function ($mdDialog) {
+        $mdDialog.show({
+            controller: 'LoginDialogController',
+            controllerAs: 'ctrl',
+            templateUrl: 'templates/unauthed/dialogLogin.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            closeTo: (document.querySelector('#login'))
+        });
+    };
+    IndexService.showRegisterDialog = function ($mdDialog) {
+        $mdDialog.show({
+            controller: 'RegisterDialogController',
+            controllerAs: 'ctrl',
+            templateUrl: 'templates/unauthed/dialogRegister.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            closeTo: (document.querySelector('#register'))
+        });
+    };
+    IndexService.showForgotDialog = function ($mdDialog) {
+        $mdDialog.show({
+            controller: 'ForgotDialogController',
+            controllerAs: 'ctrl',
+            templateUrl: 'templates/unauthed/dialogForgot.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: true
+        });
+    };
+    IndexService.setUserCreds = function ($cookies, creds) {
+        $cookies.put('userId', creds.id);
+        $cookies.put('userFirstName', creds.firstName);
+        $cookies.put('userLastName', creds.lastName);
+        $cookies.put('userEmail', creds.email);
+        $cookies.put('userToken', creds.token);
+        $cookies.put('userVerified', creds.verified);
     };
 
     return IndexService;

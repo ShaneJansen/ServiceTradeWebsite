@@ -3,17 +3,17 @@
  */
 
 /* IndexController */
-var IndexController = function ($mdDialog) {
+var IndexController = function ($mdDialog, IndexService) {
     var self = this;
 
     self.showLoginDialog = function () {
-        showLoginDialog($mdDialog);
+        IndexService.showLoginDialog($mdDialog);
     };
     self.showRegisterDialog = function () {
-        showRegisterDialog($mdDialog);
+        IndexService.showRegisterDialog($mdDialog);
     };
     self.showForgotDialog = function () {
-        showForgotDialog($mdDialog);
+        IndexService.showForgotDialog($mdDialog);
     };
 };
 
@@ -45,7 +45,7 @@ LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window
 
     $scope.$on('handlerAuthedUser', function() {
         var creds = IndexService.getData().login.creds;
-        setUserCreds($cookies, creds);
+        IndexService.setUserCreds($cookies, creds);
         $window.location.href = '/home';
     });
     $scope.$on('handlerFailedAuthUser', function() {
@@ -103,52 +103,12 @@ var ForgotDialogController = function ($mdDialog) {
 };
 
 /*
-    Functions
- */
-function showLoginDialog($mdDialog) {
-    $mdDialog.show({
-        controller: 'LoginDialogController',
-        controllerAs: 'ctrl',
-        templateUrl: 'templates/unauthed/dialogLogin.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true,
-        closeTo: (document.querySelector('#login'))
-    });
-}
-function showRegisterDialog($mdDialog) {
-    $mdDialog.show({
-        controller: 'RegisterDialogController',
-        controllerAs: 'ctrl',
-        templateUrl: 'templates/unauthed/dialogRegister.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true,
-        closeTo: (document.querySelector('#register'))
-    });
-}
-function showForgotDialog($mdDialog) {
-    $mdDialog.show({
-        controller: 'ForgotDialogController',
-        controllerAs: 'ctrl',
-        templateUrl: 'templates/unauthed/dialogForgot.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true
-    });
-}
-function setUserCreds($cookies, creds) {
-    $cookies.put('userId', creds.id);
-    $cookies.put('userFirstName', creds.firstName);
-    $cookies.put('userLastName', creds.lastName);
-    $cookies.put('userEmail', creds.email);
-    $cookies.put('userToken', creds.token);
-    $cookies.put('userVerified', creds.verified);
-}
-
-/*
     Modules
  */
 var module = angular.module('indexModule', ['ngCookies', 'ngMaterial', 'mainModule']);
 module.controller('IndexController', [
     '$mdDialog',
+    'IndexService',
     IndexController
 ]);
 module.controller('LoginDialogController', [

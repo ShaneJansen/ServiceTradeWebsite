@@ -7,10 +7,11 @@ var AuthedServiceFtn = function () {
     AuthedService.data = {
         user: {
             id: -1,
-            firstName: "",
-            lastName: "",
-            email: "",
-            token: ""
+            firstName: '',
+            lastName: '',
+            email: '',
+            token: '',
+            verified: ''
         }
     };
 
@@ -32,6 +33,25 @@ var AuthedServiceFtn = function () {
     };
     AuthedService.setUserToken = function (token) {
         AuthedService.data.user.token = token;
+    };
+    AuthedService.setUserVerified = function (verified) {
+        AuthedService.data.user.verified = verified;
+    };
+
+    // Functions
+    AuthedService.loadUserData = function ($cookies) {
+        AuthedService.setUserId($cookies.get('userId'));
+        AuthedService.setUserFirstName($cookies.get('userFirstName'));
+        AuthedService.setUserLastName($cookies.get('userLastName'));
+        AuthedService.setUserEmail($cookies.get('userEmail'));
+        AuthedService.setUserToken($cookies.get('userToken'));
+        AuthedService.setUserVerified($cookies.get('userVerified'));
+    };
+    AuthedService.forgetStoredData = function ($cookies) {
+        var cookies = $cookies.getAll();
+        angular.forEach(cookies, function (v, k) {
+            $cookies.remove(k);
+        });
     };
 
     return AuthedService;

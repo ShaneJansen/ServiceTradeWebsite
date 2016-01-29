@@ -28,6 +28,14 @@
                     <div class="inset">Settings</div>
                 </a>
             </md-list-item>
+            <md-list-item>
+                <a ng-click="authed.logout()" md-ink-ripple layout="row" layout-align="start center" flex>
+                    <div class="inset">
+                        <i class="material-icons">power_settings_new</i>
+                    </div>
+                    <div class="inset">Logoff</div>
+                </a>
+            </md-list-item>
         </md-list>
     </md-sidenav>
     <div layout="column" layout-fill>

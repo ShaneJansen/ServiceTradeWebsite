@@ -3,8 +3,8 @@
 @section('main.body')
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <md-button aria-label="Go Back" ng-href="@yield('toolbar.backLink')">
-                Go Back
+            <md-button class="md-icon-button" ng-href="@yield('toolbar.backLink')">
+                <i class="material-icons">arrow_back</i>
             </md-button>
             <h2>
                 <span>@yield('toolbar.title')</span>
