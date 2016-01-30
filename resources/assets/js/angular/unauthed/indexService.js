@@ -25,7 +25,7 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
     };
 
     // Network requests
-    IndexService.apiCreateUser = function() {
+    IndexService.apiCreateUser = function(success, failure) {
         $http({
             url: MainService.getData().apiUrl + 'user',
             method: 'POST',
@@ -37,13 +37,13 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
             }
         }).then(function successCallback(response) {
             IndexService.data.register.creds = response.data;
-            $rootScope.$broadcast('handlerCreatedUser');
+            success();
         }, function errorCallback(response) {
             IndexService.data.register.error = response.data;
-            $rootScope.$broadcast('handlerFailedCreateUser');
+            failure();
         });
     };
-    IndexService.apiAuthUser = function() {
+    IndexService.apiAuthUser = function(success, failure) {
         $http({
             url: MainService.getData().apiUrl + 'user/auth',
             method: 'POST',
@@ -53,10 +53,10 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
             }
         }).then(function successCallback(response) {
             IndexService.data.login.creds = response.data;
-            $rootScope.$broadcast('handlerAuthedUser');
+            success();
         }, function errorCallback(response) {
             IndexService.data.login.error = response.data;
-            $rootScope.$broadcast('handlerFailedAuthUser');
+            failure();
         });
     };
 
@@ -91,12 +91,7 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
         });
     };
     IndexService.setUserCreds = function ($cookies, creds) {
-        $cookies.put('userId', creds.id);
-        $cookies.put('userFirstName', creds.firstName);
-        $cookies.put('userLastName', creds.lastName);
-        $cookies.put('userEmail', creds.email);
-        $cookies.put('userToken', creds.token);
-        $cookies.put('userVerified', creds.verified);
+        $cookies.put('userCreds', JSON.stringify(creds));
     };
 
     return IndexService;

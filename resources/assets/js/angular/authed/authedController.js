@@ -14,7 +14,7 @@ AuthedController.prototype.initialize = function ($window, $cookies, AuthedServi
     AuthedService.loadUserData($cookies);
 
     // Check if cookies are set
-    if ($cookies.get('userId') == undefined) {
+    if ($cookies.get('userCreds') == undefined) {
         $window.location.href = '/';
     }
 
@@ -24,6 +24,8 @@ AuthedController.prototype.initialize = function ($window, $cookies, AuthedServi
         $window.location.href = '/';
     };
 };
+
+
 
 var module = angular.module('authedModule', ['ngCookies']);
 module.controller('AuthedController', [

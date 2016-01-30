@@ -44,12 +44,13 @@ var AuthedServiceFtn = function () {
 
     // Functions
     AuthedService.loadUserData = function ($cookies) {
-        AuthedService.setUserId($cookies.get('userId'));
-        AuthedService.setUserFirstName($cookies.get('userFirstName'));
-        AuthedService.setUserLastName($cookies.get('userLastName'));
-        AuthedService.setUserEmail($cookies.get('userEmail'));
-        AuthedService.setUserToken($cookies.get('userToken'));
-        AuthedService.setUserVerified($cookies.get('userVerified'));
+        var userCreds = JSON.parse($cookies.get('userCreds'));
+        AuthedService.setUserId(userCreds.id);
+        AuthedService.setUserFirstName(userCreds.firstName);
+        AuthedService.setUserLastName(userCreds.lastName);
+        AuthedService.setUserEmail(userCreds.email);
+        AuthedService.setUserToken(userCreds.token);
+        AuthedService.setUserVerified(userCreds.verified);
     };
     AuthedService.forgetStoredData = function ($cookies) {
         var cookies = $cookies.getAll();

@@ -17,13 +17,18 @@ var IndexController = function ($mdDialog, IndexService) {
 /*
     LoginDialogController
  */
-var LoginDialogController = function ($scope, $window, $cookies, $mdDialog, MainService, IndexService) {
+var LoginDialogController = function ($window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, $window, $cookies, MainService, IndexService);
-    self.setClickHandlers($mdDialog, IndexService);
+    self.initialize(IndexService);
+    self.setClickHandlers($window, $cookies, $mdDialog, MainService, IndexService);
 };
-LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
+LoginDialogController.prototype.initialize = function (IndexService) {
+    var self = this;
+
+    self.data = IndexService.getData().login;
+};
+LoginDialogController.prototype.setClickHandlers = function ($window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
     self.cancel = function () {
@@ -34,33 +39,30 @@ LoginDialogController.prototype.setClickHandlers = function ($mdDialog, IndexSer
     };
     self.login = function () {
         self.showProgress = true;
-        IndexService.apiAuthUser();
+        IndexService.apiAuthUser(function () {
+            var creds = IndexService.getData().login.creds;
+            IndexService.setUserCreds($cookies, creds);
+            $window.location.href = '/home';
+        }, function () {
+            self.showProgress = false;
+            self.data.error = MainService.arrayToNl(self.data.error);
+        });
     };
-};
-LoginDialogController.prototype.setBroadcastHandlers = function ($scope, $window, $cookies, MainService, IndexService) {
-    var self = this;
-
-    $scope.$on('handlerAuthedUser', function() {
-        var creds = IndexService.getData().login.creds;
-        IndexService.setUserCreds($cookies, creds);
-        $window.location.href = '/home';
-    });
-    $scope.$on('handlerFailedAuthUser', function() {
-        self.showProgress = false;
-        self.data.error = MainService.arrayToNl(self.data.error);
-    });
-
-    self.data = IndexService.getData().login;
 };
 
 /* RegisterDialogController */
-var RegisterDialogController = function ($scope, $window, $cookies, $mdDialog, MainService, IndexService) {
+var RegisterDialogController = function ($window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
-    self.setBroadcastHandlers($scope, $window, $cookies, MainService, IndexService);
-    self.setClickHandlers($mdDialog, IndexService);
+    self.initialize(IndexService);
+    self.setClickHandlers($window, $cookies, $mdDialog, MainService, IndexService);
 };
-RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
+RegisterDialogController.prototype.initialize = function (IndexService) {
+    var self = this;
+
+    self.data = IndexService.getData().register;
+};
+RegisterDialogController.prototype.setClickHandlers = function ($window, $cookies, $mdDialog, MainService, IndexService) {
     var self = this;
 
     self.cancel = function () {
@@ -68,23 +70,15 @@ RegisterDialogController.prototype.setClickHandlers = function ($mdDialog, Index
     };
     self.register = function () {
         self.showProgress = true;
-        IndexService.apiCreateUser();
+        IndexService.apiCreateUser(function () {
+            var creds = IndexService.getData().register.creds;
+            IndexService.setUserCreds($cookies, creds);
+            $window.location.href = '/home';
+        }, function () {
+            self.showProgress = false;
+            self.data.error = MainService.arrayToNl(self.data.error);
+        });
     };
-};
-RegisterDialogController.prototype.setBroadcastHandlers = function ($scope, $window, $cookies, MainService, IndexService) {
-    var self = this;
-
-    $scope.$on('handlerCreatedUser', function() {
-        var creds = IndexService.getData().register.creds;
-        IndexService.setUserCreds($cookies, creds);
-        $window.location.href = '/home';
-    });
-    $scope.$on('handlerFailedCreateUser', function() {
-        self.showProgress = false;
-        self.data.error = MainService.arrayToNl(self.data.error);
-    });
-
-    self.data = IndexService.getData().register;
 };
 
 /* FormatDialogController */
@@ -109,7 +103,6 @@ module.controller('IndexController', [
     IndexController
 ]);
 module.controller('LoginDialogController', [
-    '$scope',
     '$window',
     '$cookies',
     '$mdDialog',
@@ -118,7 +111,6 @@ module.controller('LoginDialogController', [
     LoginDialogController
 ]);
 module.controller('RegisterDialogController', [
-    '$scope',
     '$window',
     '$cookies',
     '$mdDialog',
