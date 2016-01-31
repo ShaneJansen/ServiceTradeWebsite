@@ -6,7 +6,7 @@
             <div ng-controller="AuthedController as authed" layout="column" layout-fill>
             <md-content layout="column" flex md-scroll-y>
                 <div layout="column" flex> @yield('main.body')</div>
-                <div layout="column"> @include('layouts.footer') </div>
+                <div layout="column"> @include('layouts.authed.footer') </div>
             </md-content>
             @section('base.bodyJavaScript')
                 <script src="/dist/js/authed.js"></script>

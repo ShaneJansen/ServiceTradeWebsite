@@ -6,7 +6,7 @@
             <md-content layout="column" flex md-scroll-y>
                 <div> @yield('main.body')</div>
                 <span flex></span>
-                <div> @include('layouts.footer') </div>
+                <div> @include('layouts.unauthed.footer') </div>
             </md-content>
             @section('base.bodyJavaScript')
                 <script src="/dist/js/unauthed.js"></script>

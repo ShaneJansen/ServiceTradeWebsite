@@ -16,7 +16,7 @@ SkillsController.prototype.initialize = function ($scope, AuthedService) {
     });
 };
 
-var module = angular.module('skillsModule', ['ngMaterial']);
+var module = angular.module('skillsModule', []);
 module.controller('SkillsController', [
     '$scope',
     'AuthedService',

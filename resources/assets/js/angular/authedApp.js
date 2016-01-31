@@ -20,7 +20,6 @@ AuthedApp.prototype.initialize = function(AuthedApp) {
 
 var module = angular.module('authedApp', [
     'ngRoute',
-    'ngMaterial',
     'mainModule',
     'authedModule',
     'dashboardModule',

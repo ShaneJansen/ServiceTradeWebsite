@@ -1,6 +1,6 @@
 /* Variables */
 $primary-color: #3F51B5;
-$accent-color: #2196F3;
+$accent-color: #3F5669;
 $warn-color: #F44336;
 $primary-font: 'Roboto Condensed', sans-serif;
 $text-color: #757575;
@@ -13,7 +13,7 @@ md-content {
     color: $text-color;
 }
 
-.focused { color: $accent-color; }
+.focused { color: $primary-color; }
 
 .form-error {
     color: $warn-color;
@@ -42,12 +42,12 @@ md-content {
 
 /* Footer */
 .footer {
-    .md-primary {
-        padding: 0;
-        margin: 0;
+    height: 70px;
+    background-color: #3F5669;
+    .md-button.md-primary {
+        color: white;
     }
-    #btnSjjapps {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+}
+.footer-authed {
+    height: inherit;
 }

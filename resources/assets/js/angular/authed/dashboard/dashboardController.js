@@ -16,7 +16,7 @@ DashboardController.prototype.initialize = function ($scope, AuthedService) {
     });
 };
 
-var module = angular.module('dashboardModule', ['ngMaterial']);
+var module = angular.module('dashboardModule', []);
 module.controller('DashboardController', [
     '$scope',
     'AuthedService',

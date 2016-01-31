@@ -19,7 +19,6 @@ UnauthedApp.prototype.initialize = function(UnauthedApp) {
 };
 
 var module = angular.module('unauthedApp', [
-    'ngMaterial',
     'mainModule',
     'indexModule'
 ]);

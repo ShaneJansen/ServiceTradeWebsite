@@ -32,7 +32,7 @@ MainController.prototype.setClickHandlers = function($mdSidenav) {
     };
 };
 
-var module = angular.module('mainModule', []);
+var module = angular.module('mainModule', ['ngMaterial']);
 module.controller('MainController', [
     '$scope',
     '$location',

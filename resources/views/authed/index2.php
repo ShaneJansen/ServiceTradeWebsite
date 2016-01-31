@@ -46,7 +46,7 @@
             </md-list-item>
         </md-list>
     </md-sidenav>
-    <div layout="column" layout-fill>
+    <div layout="column" flex>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" ng-click="main.toggleSidenav('left')" hide-gt-md>
@@ -58,8 +58,8 @@
                 <span flex></span>
             </div>
         </md-toolbar>
-        <md-content flex md-scroll-y>
-            <div ng-view></div>
+        <md-content md-scroll-y flex>
+            <div ng-view class="view-frame"></div>
         </md-content>
     </div>
 </div>
