@@ -5,16 +5,15 @@ $warn-color: #F44336;
 $primary-font: 'Roboto Condensed', sans-serif;
 $text-color: #757575;
 
-body {
-    font-family: $primary-font;
-}
 
-md-content {
-    color: $text-color;
-}
+/* Core overrides */
+body { font-family: $primary-font; }
+md-content { color: $text-color; }
+md-switch { line-height: 15px; }
 
+
+/* Custom styles */
 .focused { color: $primary-color; }
-
 .form-error {
     color: $warn-color;
     font-size: 16px;
@@ -24,21 +23,17 @@ md-content {
     font-size: 12px;
 }
 
-.angular-with-nl {
-    white-space: pre-wrap;
-}
 
 /* Animations */
 .animate-hide {
-    transition: all linear 0.5s;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
     opacity: 1;
-    padding: 10px;
 }
-.animate-hide.ng-hide {
-    line-height: 0;
-    opacity: 0;
-    padding: 0 10px;
-}
+.animate-hide.ng-hide { opacity: 0; }
+
 
 /* Footer */
 .footer {

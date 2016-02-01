@@ -1,5 +1,4 @@
 <div layout="column">
-
     <div layout="row" layout-align="center center">
         <md-card flex-gt-sm="70" flex="100">
             <md-card-title>
@@ -10,28 +9,11 @@
             <md-card-content>
                 <md-switch class="md-primary" ng-model="dashboard.data.available">
                     <span ng-hide="dashboard.data.available">Not </span>Available for Jobs
+                    <br>
+                    <span class="input-error" ng-hide="dashboard.data.available">You can still request jobs, but you will not be selected for job offers.</span>
                 </md-switch>
                 <div class="animate-hide" ng-hide="!dashboard.data.available">
-                    <ul>
-                        <li>
-                            Active Jobs
-                        </li>
-                        <li>
-                            Active Jobs
-                        </li>
-                        <li>
-                            Active Jobs
-                        </li>
-                        <li>
-                            Active Jobs
-                        </li>
-                        <li>
-                            Active Jobs
-                        </li>
-                        <li>
-                            Active Jobs
-                        </li>
-                    </ul>
+                    test
                 </div>
             </md-card-content>
         </md-card>
