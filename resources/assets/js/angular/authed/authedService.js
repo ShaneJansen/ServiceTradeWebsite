@@ -11,7 +11,8 @@ var AuthedServiceFtn = function () {
             lastName: '',
             email: '',
             token: '',
-            verified: ''
+            verified: '',
+            availability: ''
         },
         toolbarTitle: ''
     };
@@ -38,6 +39,9 @@ var AuthedServiceFtn = function () {
     AuthedService.setUserVerified = function (verified) {
         AuthedService.data.user.verified = verified;
     };
+    AuthedService.setUserAvailability = function (availability) {
+        AuthedService.data.user.availability = availability;
+    };
     AuthedService.setToolbarTitle = function (toolbarTitle) {
         AuthedService.data.toolbarTitle = toolbarTitle;
     };
@@ -51,6 +55,7 @@ var AuthedServiceFtn = function () {
         AuthedService.setUserEmail(userCreds.email);
         AuthedService.setUserToken(userCreds.token);
         AuthedService.setUserVerified(userCreds.verified);
+        AuthedService.setUserAvailability(userCreds.availability)
     };
     AuthedService.forgetStoredData = function ($cookies) {
         var cookies = $cookies.getAll();

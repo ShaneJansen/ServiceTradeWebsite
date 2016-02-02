@@ -2,7 +2,7 @@
  * Created by Shane Jansen on 1/24/16.
  */
 
-var IndexServiceFtn = function ($http, $rootScope, MainService) {
+var IndexServiceFtn = function ($http, MainService) {
     var IndexService = {};
     IndexService.data = {
         login: {
@@ -98,4 +98,4 @@ var IndexServiceFtn = function ($http, $rootScope, MainService) {
 };
 
 var module = angular.module('indexModule');
-module.factory('IndexService', ['$http', '$rootScope', 'MainService', IndexServiceFtn]);
+module.factory('IndexService', ['$http', 'MainService', IndexServiceFtn]);

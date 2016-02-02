@@ -2,21 +2,26 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, AuthedService) {
+var AuthedController = function($window, $cookies, $http, AuthedService) {
     var self = this;
 
-    self.initialize($window, $cookies, AuthedService);
+    self.initialize($window, $cookies, $http, AuthedService);
 };
 
-AuthedController.prototype.initialize = function ($window, $cookies, AuthedService) {
+AuthedController.prototype.initialize = function ($window, $cookies, $http, AuthedService) {
     var self = this;
-
-    AuthedService.loadUserData($cookies);
 
     // Check if cookies are set
     if ($cookies.get('userCreds') == undefined) {
         $window.location.href = '/';
     }
+
+    // Load user data from the cookies
+    AuthedService.loadUserData($cookies);
+
+    // Set the default http headers
+    $http.defaults.headers.common['X-USER-ID'] = AuthedService.data.user.id;
+    $http.defaults.headers.common['X-AUTH-TOKEN'] = AuthedService.data.user.token;
 
     self.data = AuthedService.getData();
     self.logout = function () {
@@ -31,6 +36,7 @@ var module = angular.module('authedModule', ['ngCookies']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',
+    '$http',
     'AuthedService',
     AuthedController
 ]);
