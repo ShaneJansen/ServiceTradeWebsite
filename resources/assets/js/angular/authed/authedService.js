@@ -2,7 +2,7 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedServiceFtn = function () {
+var AuthedServiceFtn = function ($http, MainService) {
     var AuthedService = {};
     AuthedService.data = {
         user: {
@@ -46,6 +46,22 @@ var AuthedServiceFtn = function () {
         AuthedService.data.toolbarTitle = toolbarTitle;
     };
 
+    // Network requests
+    AuthedService.apiUpdateUser = function(success, failure) {
+        $http({
+            url: MainService.getData().apiUrl + 'user',
+            method: 'PUT',
+            data: AuthedService.data.user
+        }).then(function successCallback(response) {
+            console.log('NETWORK: update user success');
+            AuthedService.data.user = response.data;
+            if(success != null) success();
+        }, function errorCallback(response) {
+            console.log('NETWORK: update user failure');
+            if(failure != null) failure();
+        });
+    };
+
     // Functions
     AuthedService.loadUserData = function ($cookies) {
         var userCreds = JSON.parse($cookies.get('userCreds'));
@@ -68,4 +84,4 @@ var AuthedServiceFtn = function () {
 };
 
 var module = angular.module('authedModule');
-module.factory('AuthedService', [AuthedServiceFtn]);
+module.factory('AuthedService', ['$http', 'MainService', AuthedServiceFtn]);

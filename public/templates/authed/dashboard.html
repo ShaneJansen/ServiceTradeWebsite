@@ -7,22 +7,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                {{ authed.data.user }}
-                <br>
-                {{ dashboard.data.availabilities }}
-                <md-switch class="md-primary" ng-model="dashboard.data.available">
-                    <span ng-hide="dashboard.data.available">Not </span>Available for Jobs
-                    <br>
-                    <span class="input-error" ng-hide="dashboard.data.available">You can still request jobs, but you will not be selected for job offers.</span>
-                </md-switch>
-                <div class="animate-hide" ng-hide="!dashboard.data.available">
-                    <md-input-container>
-                        <label>Availability</label>
-                        <md-select ng-model="dashboard.selected">
-                            <md-option ng-repeat="test in dashboard.tests" value="{{ test }}">{{ test }}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
+                <my-select-availability></my-select-availability>
             </md-card-content>
         </md-card>
     </div>

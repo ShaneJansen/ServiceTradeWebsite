@@ -36,9 +36,11 @@ var IndexServiceFtn = function ($http, MainService) {
                 password: IndexService.data.register.creds.password
             }
         }).then(function successCallback(response) {
+            console.log('NETWORK: create user success');
             IndexService.data.register.creds = response.data;
             success();
         }, function errorCallback(response) {
+            console.log('NETWORK: create user failure');
             IndexService.data.register.error = response.data;
             failure();
         });
@@ -52,9 +54,11 @@ var IndexServiceFtn = function ($http, MainService) {
                 password: IndexService.data.login.creds.password
             }
         }).then(function successCallback(response) {
+            console.log('NETWORK: auth user success');
             IndexService.data.login.creds = response.data;
             success();
         }, function errorCallback(response) {
+            console.log('NETWORK: auth user failure');
             IndexService.data.login.error = response.data;
             failure();
         });

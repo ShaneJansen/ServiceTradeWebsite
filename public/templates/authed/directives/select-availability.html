@@ -1,0 +1,35 @@
+<md-switch class="md-primary" ng-model="availabilityBool" ng-change="onAvailabilityChange(true)">
+    <div layout="row" layout-align="center center">
+        <div>
+            <span ng-hide="availabilityBool">Not </span>Available for Jobs
+            <br>
+            <span class="input-error" ng-hide="availabilityBool">You can still request jobs, but you will not be selected for job offers.</span>
+        </div>
+        <md-progress-circular ng-show="showProgress" md-mode="indeterminate"></md-progress-circular>
+    </div>
+</md-switch>
+<div class="animate-hide" ng-hide="!availabilityBool">
+    <md-input-container>
+        <label>Availability</label>
+        <md-select ng-model="data.authed.user.availability" ng-change="onAvailabilityChange(false)">
+            <md-optgroup label="Weekly">
+                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'weekly'}"
+                           value="{{ availability.code }}">
+                    {{ availability.decoded }}
+                </md-option>
+            </md-optgroup>
+            <md-optgroup label="Monthly">
+                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'monthly'}"
+                           value="{{ availability.code }}">
+                    {{ availability.decoded }}
+                </md-option>
+            </md-optgroup>
+            <md-optgroup label="Always">
+                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'always'}"
+                           value="{{ availability.code }}">
+                    {{ availability.decoded }}
+                </md-option>
+            </md-optgroup>
+        </md-select>
+    </md-input-container>
+</div>

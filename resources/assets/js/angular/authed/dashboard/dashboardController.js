@@ -15,8 +15,6 @@ DashboardController.prototype.initialize = function ($scope, AuthedService, Dash
         AuthedService.setToolbarTitle('Dashboard');
     });
 
-    DashboardService.apiGetUserAvailabilities(null, null);
-
     self.data = DashboardService.getData();
 };
 
