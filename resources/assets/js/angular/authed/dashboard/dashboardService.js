@@ -14,7 +14,7 @@ var DashboardServiceFtn = function ($http, MainService) {
     };
 
     // Network requests
-    DashboardService.apiGetUserAvailabilities = function (success, failure, reload) {
+    DashboardService.apiPossibleAvailabilities = function (success, failure, reload) {
         if (DashboardService.data.availabilities == '' || reload) {
             $http({
                 url: MainService.getData().apiUrl + 'user/availabilities',

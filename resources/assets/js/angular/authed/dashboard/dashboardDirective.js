@@ -12,12 +12,11 @@ var SelectAvailabilityFtn = function (AuthedService, DashboardService) {
         restrict: 'E',
         templateUrl: '/templates/authed/directives/select-availability.html',
         scope: {
-            userAvailabilityCode: '=',
-            availabilities: '='
+
         },
         link: function(scope, element, attr) {
             scope.data = data;
-            DashboardService.apiGetUserAvailabilities(null, null, false);
+            DashboardService.apiPossibleAvailabilities(null, null, false);
 
             scope.data.authed = AuthedService.getData();
             scope.data.dashboard = DashboardService.getData();
