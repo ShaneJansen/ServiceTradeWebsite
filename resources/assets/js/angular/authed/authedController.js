@@ -2,10 +2,11 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, $http, AuthedService) {
+var AuthedController = function($window, $cookies, $http, $mdDialog, AuthedService, IndexService) {
     var self = this;
 
     self.initialize($window, $cookies, $http, AuthedService);
+    self.setClickHandlers($mdDialog, IndexService);
 };
 
 AuthedController.prototype.initialize = function ($window, $cookies, $http, AuthedService) {
@@ -30,13 +31,22 @@ AuthedController.prototype.initialize = function ($window, $cookies, $http, Auth
     };
 };
 
+AuthedController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
+    var self = this;
 
+    self.showSkillSelectDialog = function () {
+        alert('show');
+        IndexService.showSkillSelectDialog($mdDialog);
+    };
+};
 
 var module = angular.module('authedModule', ['ngCookies']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',
     '$http',
+    '$mdDialog',
     'AuthedService',
+    'IndexService',
     AuthedController
 ]);

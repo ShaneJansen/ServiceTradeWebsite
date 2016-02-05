@@ -9,7 +9,7 @@ var AddSkillsFtn = function (AuthedService, SkillsService) {
 
     return {
         restrict: 'E',
-        templateUrl: '/templates/authed/directives/add-skills.html',
+        templateUrl: '/templates/authed/directives/select-skills.html',
         scope: {
 
         },

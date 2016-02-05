@@ -6,7 +6,8 @@ var SkillsServiceFtn = function ($http, MainService) {
     var SkillsService = {};
     SkillsService.data = {
         userSkills: '',
-        skills: ''
+        skills: '',
+        skillSelections: ''
     };
 
     // Getters and setters
@@ -29,6 +30,18 @@ var SkillsServiceFtn = function ($http, MainService) {
                 if (failure != null) failure();
             });
         }
+    };
+
+    // Functions
+    SkillsService.showSkillSelectorDialog = function ($mdDialog) {
+        $mdDialog.show({
+            controller: 'SkillSelectController',
+            controllerAs: 'ctrl',
+            templateUrl: 'templates/authed/dialogs/add-skills.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: false,
+            closeTo: (document.querySelector('#selectSkills'))
+        });
     };
 
     return SkillsService;

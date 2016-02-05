@@ -2,12 +2,12 @@
  * Created by Shane Jansen on 1/25/16.
  */
 
-var SkillsController = function ($scope, AuthedService) {
+var SkillsController = function ($scope, AuthedService, SkillsService) {
     var self = this;
 
     self.initialize($scope, AuthedService);
+    self.setClickHandlers(SkillsService);
 };
-
 SkillsController.prototype.initialize = function ($scope, AuthedService) {
     var self = this;
 
@@ -15,10 +15,29 @@ SkillsController.prototype.initialize = function ($scope, AuthedService) {
         AuthedService.setToolbarTitle('Skills');
     });
 };
+SkillsController.prototype.setClickHandlers = function (SkillsService) {
+    // TODO
+    // + Add click listener to AuthController to show skill select dialog
+    // + Add elements to SkillsService to hold data from select dialog
+    // + Controllers can access selected skills through SkillsService
+};
+
+var SkillSelectController = function ($mdDialog) {
+    var self = this;
+
+    self.cancel = function () {
+        $mdDialog.cancel();
+    };
+};
 
 var module = angular.module('skillsModule', []);
 module.controller('SkillsController', [
     '$scope',
     'AuthedService',
+    'SkillsService',
     SkillsController
+]);
+module.controller('SkillSelectController', [
+    '$mdDialog',
+    SkillSelectController
 ]);
