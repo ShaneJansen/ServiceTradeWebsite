@@ -20,4 +20,4 @@ var AddSkillsFtn = function (AuthedService, SkillsService) {
 };
 
 var module = angular.module('skillsModule');
-module.directive('myAddSkills', ['AuthedService', 'SkillsService', AddSkillsFtn]);
+module.directive('mySelectSkills', ['AuthedService', 'SkillsService', AddSkillsFtn]);

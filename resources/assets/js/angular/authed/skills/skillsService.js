@@ -33,7 +33,7 @@ var SkillsServiceFtn = function ($http, MainService) {
     };
 
     // Functions
-    SkillsService.showSkillSelectorDialog = function ($mdDialog) {
+    SkillsService.showSkillSelectDialog = function ($mdDialog) {
         $mdDialog.show({
             controller: 'SkillSelectController',
             controllerAs: 'ctrl',

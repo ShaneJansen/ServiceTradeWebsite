@@ -2,11 +2,11 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, $http, $mdDialog, AuthedService, IndexService) {
+var AuthedController = function($window, $cookies, $http, $mdDialog, AuthedService, SkillsService) {
     var self = this;
 
     self.initialize($window, $cookies, $http, AuthedService);
-    self.setClickHandlers($mdDialog, IndexService);
+    self.setClickHandlers($mdDialog, SkillsService);
 };
 
 AuthedController.prototype.initialize = function ($window, $cookies, $http, AuthedService) {
@@ -31,12 +31,11 @@ AuthedController.prototype.initialize = function ($window, $cookies, $http, Auth
     };
 };
 
-AuthedController.prototype.setClickHandlers = function ($mdDialog, IndexService) {
+AuthedController.prototype.setClickHandlers = function ($mdDialog, SkillsService) {
     var self = this;
 
     self.showSkillSelectDialog = function () {
-        alert('show');
-        IndexService.showSkillSelectDialog($mdDialog);
+        SkillsService.showSkillSelectDialog($mdDialog);
     };
 };
 
@@ -47,6 +46,6 @@ module.controller('AuthedController', [
     '$http',
     '$mdDialog',
     'AuthedService',
-    'IndexService',
+    'SkillsService',
     AuthedController
 ]);
