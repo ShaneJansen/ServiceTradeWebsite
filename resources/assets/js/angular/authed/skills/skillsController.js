@@ -22,22 +22,10 @@ SkillsController.prototype.setClickHandlers = function (SkillsService) {
     // + Controllers can access selected skills through SkillsService
 };
 
-var SkillSelectController = function ($mdDialog) {
-    var self = this;
-
-    self.cancel = function () {
-        $mdDialog.cancel();
-    };
-};
-
 var module = angular.module('skillsModule', []);
 module.controller('SkillsController', [
     '$scope',
     'AuthedService',
     'SkillsService',
     SkillsController
-]);
-module.controller('SkillSelectController', [
-    '$mdDialog',
-    SkillSelectController
 ]);

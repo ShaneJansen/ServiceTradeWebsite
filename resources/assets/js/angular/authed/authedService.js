@@ -12,7 +12,8 @@ var AuthedServiceFtn = function ($http, MainService) {
             email: '',
             token: '',
             verified: '',
-            availability: ''
+            availability: '',
+            firstLogin: ''
         },
         toolbarTitle: ''
     };
@@ -41,6 +42,9 @@ var AuthedServiceFtn = function ($http, MainService) {
     };
     AuthedService.setUserAvailability = function (availability) {
         AuthedService.data.user.availability = availability;
+    };
+    AuthedService.setUserFirstLogin = function (firstLogin) {
+        AuthedService.data.user.firstLogin = firstLogin;
     };
     AuthedService.setToolbarTitle = function (toolbarTitle) {
         AuthedService.data.toolbarTitle = toolbarTitle;
@@ -71,12 +75,22 @@ var AuthedServiceFtn = function ($http, MainService) {
         AuthedService.setUserEmail(userCreds.email);
         AuthedService.setUserToken(userCreds.token);
         AuthedService.setUserVerified(userCreds.verified);
-        AuthedService.setUserAvailability(userCreds.availability)
+        AuthedService.setUserAvailability(userCreds.availability);
+        AuthedService.setUserFirstLogin(userCreds.firstLogin);
     };
     AuthedService.forgetStoredData = function ($cookies) {
         var cookies = $cookies.getAll();
         angular.forEach(cookies, function (v, k) {
             $cookies.remove(k);
+        });
+    };
+    AuthedService.showTutorialDialog = function ($mdDialog) {
+        $mdDialog.show({
+            controller: 'TutorialController',
+            controllerAs: 'ctrl',
+            templateUrl: 'templates/authed/dialogs/tutorial.html',
+            parent: angular.element(document.body),
+            clickOutsideToClose: false
         });
     };
 

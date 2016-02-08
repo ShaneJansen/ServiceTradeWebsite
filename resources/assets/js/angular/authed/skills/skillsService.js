@@ -32,18 +32,6 @@ var SkillsServiceFtn = function ($http, MainService) {
         }
     };
 
-    // Functions
-    SkillsService.showSkillSelectDialog = function ($mdDialog) {
-        $mdDialog.show({
-            controller: 'SkillSelectController',
-            controllerAs: 'ctrl',
-            templateUrl: 'templates/authed/dialogs/add-skills.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: false,
-            closeTo: (document.querySelector('#selectSkills'))
-        });
-    };
-
     return SkillsService;
 };
 

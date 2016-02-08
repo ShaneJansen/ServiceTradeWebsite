@@ -2,7 +2,7 @@
  * Created by Shane Jansen on 2/3/16.
  */
 
-var AddSkillsFtn = function (AuthedService, SkillsService) {
+var AddSkillsFtn = function (SkillsService) {
     var data = {
 
     };
@@ -20,4 +20,4 @@ var AddSkillsFtn = function (AuthedService, SkillsService) {
 };
 
 var module = angular.module('skillsModule');
-module.directive('mySelectSkills', ['AuthedService', 'SkillsService', AddSkillsFtn]);
+module.directive('mySelectSkills', ['SkillsService', AddSkillsFtn]);

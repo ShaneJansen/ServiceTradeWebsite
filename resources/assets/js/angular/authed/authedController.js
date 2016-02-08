@@ -2,14 +2,13 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, $http, $mdDialog, AuthedService, SkillsService) {
+var AuthedController = function($window, $cookies, $mdDialog, $http, AuthedService) {
     var self = this;
 
-    self.initialize($window, $cookies, $http, AuthedService);
-    self.setClickHandlers($mdDialog, SkillsService);
+    self.initialize($window, $cookies, $mdDialog, $http, AuthedService);
+    self.setClickHandlers($window, $cookies, AuthedService);
 };
-
-AuthedController.prototype.initialize = function ($window, $cookies, $http, AuthedService) {
+AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, $http, AuthedService) {
     var self = this;
 
     // Check if cookies are set
@@ -24,28 +23,57 @@ AuthedController.prototype.initialize = function ($window, $cookies, $http, Auth
     $http.defaults.headers.common['X-USER-ID'] = AuthedService.data.user.id;
     $http.defaults.headers.common['X-AUTH-TOKEN'] = AuthedService.data.user.token;
 
+    // Set scope data
     self.data = AuthedService.getData();
+
+    // Check for first login
+    if (self.data.user.firstLogin == 0) {
+        AuthedService.showTutorialDialog($mdDialog);
+    }
+};
+AuthedController.prototype.setClickHandlers = function ($window, $cookies, AuthedService) {
+    var self = this;
+
     self.logout = function () {
         AuthedService.forgetStoredData($cookies);
         $window.location.href = '/';
     };
 };
 
-AuthedController.prototype.setClickHandlers = function ($mdDialog, SkillsService) {
+var TutorialController = function ($mdDialog, MainService) {
     var self = this;
 
-    self.showSkillSelectDialog = function () {
-        SkillsService.showSkillSelectDialog($mdDialog);
+    self.data = {
+        appName: MainService.data.appName,
+        currentIndex: 0,
+        maxIndex: 2
     };
+    self.previous = function () {
+        if (self.data.currentIndex > 0) {
+            self.data.currentIndex--;
+        }
+    };
+    self.next = function () {
+        if (self.data.currentIndex < self.data.maxIndex) {
+            self.data.currentIndex++;
+        }
+        else {
+            $mdDialog.cancel();
+        }
+    }
 };
 
 var module = angular.module('authedModule', ['ngCookies']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',
-    '$http',
     '$mdDialog',
+    '$http',
     'AuthedService',
-    'SkillsService',
     AuthedController
+]);
+module.controller('TutorialController', [
+    '$mdDialog',
+    'MainService',
+    TutorialController
 ]);
