@@ -5,7 +5,7 @@
 var DashboardServiceFtn = function ($http, MainService) {
     var DashboardService = {};
     DashboardService.data = {
-        availabilities: ''
+        possibleAvailabilities: ''
     };
 
     // Getters and setters
@@ -14,14 +14,14 @@ var DashboardServiceFtn = function ($http, MainService) {
     };
 
     // Network requests
-    DashboardService.apiPossibleAvailabilities = function (success, failure, reload) {
-        if (DashboardService.data.availabilities == '' || reload) {
+    DashboardService.apiGetPossibleAvailabilities = function (success, failure, reload) {
+        if (DashboardService.data.possibleAvailabilities == '' || reload) {
             $http({
                 url: MainService.getData().apiUrl + 'user/availabilities',
                 method: 'GET'
             }).then(function successCallback(response) {
                 console.log('NETWORK: get user availabilities success');
-                DashboardService.data.availabilities = response.data;
+                DashboardService.data.possibleAvailabilities = response.data;
                 if (success != null) success();
             }, function errorCallback(response) {
                 console.log('NETWORK: get user availabilities failure');

@@ -1,19 +1,9 @@
 <style>
-    md-tabs-wrapper {
-        display: none;
-    }
+    md-tabs-wrapper { display: none; }
+    md-dialog-content { max-width: 800px; }
+    p { font-size: 1.2em; }
 
-    md-dialog-content {
-        max-width: 800px;
-    }
-    p {
-        font-size: 1.2em;
-    }
-    h2 {
-        margin-bottom: 0;
-    }
-
-    #title {
+    #step {
         font-weight: bold;
         font-size: 1.5em;
     }
@@ -29,25 +19,36 @@
     <md-dialog-content>
         <div class="md-dialog-content">
             <div layout="column" layout-align="center center">
-                <span id="title">Step {{ ctrl.data.currentIndex + 1 }} of {{ ctrl.data.maxIndex + 1 }}</span>
+                <span id="step">Step {{ ctrl.data.currentIndex + 1 }} of {{ ctrl.data.maxIndex + 1 }}</span>
                 <md-tabs md-dynamic-height md-border-bottom md-selected="ctrl.data.currentIndex">
                     <md-tab label="one">
                         <md-content class="md-padding">
                             <h2 class="md-display-2">What is {{ ctrl.data.appName }}?</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
+                            <p>{{ ctrl.data.appName }} is a platform where you can put your own skills to use, build your
+                                experience and resume, and get work done in return.
+                            </p>
+                            <ul>
+                                <li>Credits are used as a currency.</li>
+                                <li>When you complete a job, you are awarded a predetermined number of credits.</li>
+                                <li>When you request a job, you offer some of your own credits.</li>
+                            </ul>
                         </md-content>
                     </md-tab>
                     <md-tab label="two">
                         <md-content class="md-padding">
-                            <h2 class="md-display-2">Select your skills</h2>
+                            <h2 class="md-display-2">Add your skills</h2>
+                            <p>Begin by adding your own skills. Others can request jobs based on the skills you choose
+                                here. Skills can be added or removed anytime.
+                            </p>
                             <my-select-skills></my-select-skills>
-                            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci comm, finibus commodo lectus.</p>
                         </md-content>
                     </md-tab>
                     <md-tab label="three">
                         <md-content class="md-padding">
                             <h2 class="md-display-2">Earn free credits</h2>
-                            <p>Share {{ ctrl.data.appName }} with your friends via Facebook and/or Twitter to earn up to 4 free credits. You can always do this later in the "Promotions" tab.</p>
+                            <p>Share {{ ctrl.data.appName }} with your friends via Facebook and/or Twitter to earn up to
+                                4 free credits. You can always do this later in the "Promotions" tab.
+                            </p>
                         </md-content>
                     </md-tab>
                 </md-tabs>
@@ -57,11 +58,11 @@
     </md-dialog-content>
     <md-dialog-actions layout="row">
         <md-button ng-click="ctrl.previous()">
-            Previous
+            Previous Step
         </md-button>
         <span flex></span>
         <md-button ng-click="ctrl.next()" style="margin-right:20px;">
-            Next
+            Next Step
         </md-button>
     </md-dialog-actions>
 </md-dialog>

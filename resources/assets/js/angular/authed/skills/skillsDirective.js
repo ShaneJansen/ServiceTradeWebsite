@@ -4,8 +4,15 @@
 
 var AddSkillsFtn = function (SkillsService) {
     var data = {
-
+        currentTabIndex: 0,
+        selectedCategory: '',
+        selectedSubCategory: '',
+        selectedSkill: ''
     };
+
+    function setBackButton(scope) {
+        scope.canGoBack = data.currentTabIndex != 0;
+    }
 
     return {
         restrict: 'E',
@@ -15,6 +22,32 @@ var AddSkillsFtn = function (SkillsService) {
         },
         link: function(scope, element, attr) {
             scope.data = data;
+            scope.canGoBack = false;
+            SkillsService.apiGetPossibleSkills(null, null, false);
+            SkillsService.setSkillSelections('');
+
+            data.skills = SkillsService.getData();
+
+            scope.backClicked = function() {
+                data.currentTabIndex--;
+                setBackButton(scope);
+            };
+            scope.categoryClicked = function(category) {
+                data.selectedCategory = category;
+                data.currentTabIndex++;
+                setBackButton(scope);
+            };
+            scope.subCategoryClicked = function(subCategory) {
+                data.selectedSubCategory = subCategory;
+                data.currentTabIndex++;
+                setBackButton(scope);
+            };
+            scope.skillClicked = function(skill) {
+                data.selectedSkill = skill;
+                // TODO: save the skill to the user's account
+                data.currentTabIndex = 0;
+                setBackButton(scope);
+            };
         }
     };
 };

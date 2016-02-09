@@ -13,19 +13,19 @@
         <label>Frequency</label>
         <md-select ng-model="data.authed.user.availability" ng-change="onAvailabilityChange(false)">
             <md-optgroup label="Weekly">
-                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'weekly'}"
+                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'weekly'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Monthly">
-                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'monthly'}"
+                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'monthly'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Always">
-                <md-option ng-repeat="availability in data.dashboard.availabilities | filter: {codeType: 'always'}"
+                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'always'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>

@@ -1,3 +1,5 @@
+@import "resources/assets/sass/base";
+
 md-sidenav {
   a {
     color: inherit;
@@ -7,6 +9,7 @@ md-sidenav {
     outline: none;
   }
 }
+md-grid-tile { background: $accent-color; }
 
 .view-frame {
   position: absolute;

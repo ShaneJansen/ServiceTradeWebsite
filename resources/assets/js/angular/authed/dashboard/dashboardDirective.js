@@ -16,7 +16,7 @@ var SelectAvailabilityFtn = function (AuthedService, DashboardService) {
         },
         link: function(scope, element, attr) {
             scope.data = data;
-            DashboardService.apiPossibleAvailabilities(null, null, false);
+            DashboardService.apiGetPossibleAvailabilities(null, null, false);
 
             scope.data.authed = AuthedService.getData();
             scope.data.dashboard = DashboardService.getData();
