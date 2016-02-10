@@ -11,7 +11,7 @@
 <div class="animate-hide" ng-hide="!availabilityBool">
     <md-input-container>
         <label>Frequency</label>
-        <md-select ng-model="data.authed.user.availability" ng-change="onAvailabilityChange(false)">
+        <md-select ng-model="data.user.availability" ng-change="onAvailabilityChange(false)">
             <md-optgroup label="Weekly">
                 <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'weekly'}"
                            value="{{ availability.code }}">

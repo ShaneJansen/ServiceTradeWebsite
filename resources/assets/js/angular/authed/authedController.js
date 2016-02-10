@@ -2,13 +2,13 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, $mdDialog, $http, AuthedService) {
+var AuthedController = function($window, $cookies, $mdDialog, $http, AuthedService, UserManager) {
     var self = this;
 
-    self.initialize($window, $cookies, $mdDialog, $http, AuthedService);
-    self.setClickHandlers($window, $cookies, AuthedService);
+    self.initialize($window, $cookies, $mdDialog, $http, AuthedService, UserManager);
+    self.setClickHandlers($window, $cookies, UserManager);
 };
-AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, $http, AuthedService) {
+AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, $http, AuthedService, UserManager) {
     var self = this;
 
     // Check if cookies are set
@@ -16,26 +16,24 @@ AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, 
         $window.location.href = '/';
     }
 
-    // Load user data from the cookies
-    AuthedService.loadUserData($cookies);
+    // Load and set user data
+    UserManager.loadUserData();
+    self.data = UserManager.getData();
 
     // Set the default http headers
-    $http.defaults.headers.common['X-USER-ID'] = AuthedService.data.user.id;
-    $http.defaults.headers.common['X-AUTH-TOKEN'] = AuthedService.data.user.token;
-
-    // Set scope data
-    self.data = AuthedService.getData();
+    $http.defaults.headers.common['X-USER-ID'] = self.data.user.getId();
+    $http.defaults.headers.common['X-AUTH-TOKEN'] = self.data.user.getToken();
 
     // Check for first login
-    if (self.data.user.firstLogin == 0) {
+    if (self.data.user.getFirstLogin() == 0) {
         AuthedService.showTutorialDialog($mdDialog);
     }
 };
-AuthedController.prototype.setClickHandlers = function ($window, $cookies, AuthedService) {
+AuthedController.prototype.setClickHandlers = function ($window, $cookies, UserManager) {
     var self = this;
 
     self.logout = function () {
-        AuthedService.forgetStoredData($cookies);
+        UserManager.forgetStoredData();
         $window.location.href = '/';
     };
 };
@@ -63,13 +61,14 @@ var TutorialController = function ($mdDialog, MainService) {
     }
 };
 
-var module = angular.module('authedModule', ['ngCookies']);
+var module = angular.module('authedModule', ['ngCookies', 'userModule']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',
     '$mdDialog',
     '$http',
     'AuthedService',
+    'UserManager',
     AuthedController
 ]);
 module.controller('TutorialController', [

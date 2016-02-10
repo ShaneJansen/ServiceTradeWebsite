@@ -5,8 +5,8 @@
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <user-avatar></user-avatar>
                 <span></span>
-                <div>{{ authed.data.user.firstName }} {{ authed.data.user.lastName }}</div>
-                <div>{{ authed.data.user.email }}</div>
+                <div>{{ authed.data.user.getFirstName() }} {{ authed.data.user.getLastName() }}</div>
+                <div>{{ authed.data.user.getEmail() }}</div>
             </div>
         </md-toolbar>
         <md-list>

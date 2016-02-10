@@ -2,26 +2,21 @@
  * Created by Shane Jansen on 1/25/16.
  */
 
-var DashboardController = function ($scope, AuthedService, DashboardService) {
+var DashboardController = function ($scope, AuthedService) {
     var self = this;
-
-    self.initialize($scope, AuthedService, DashboardService);
+    self.initialize($scope, AuthedService);
 };
 
-DashboardController.prototype.initialize = function ($scope, AuthedService, DashboardService) {
+DashboardController.prototype.initialize = function ($scope, AuthedService) {
     var self = this;
-
     $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
         AuthedService.setToolbarTitle('Dashboard');
     });
-
-    self.data = DashboardService.getData();
 };
 
-var module = angular.module('dashboardModule', []);
+var module = angular.module('dashboardModule', ['availabilityModule']);
 module.controller('DashboardController', [
     '$scope',
     'AuthedService',
-    'DashboardService',
     DashboardController
 ]);

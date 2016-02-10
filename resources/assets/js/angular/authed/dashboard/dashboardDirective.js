@@ -2,10 +2,12 @@
  * Created by Shane Jansen on 2/3/16.
  */
 
-var SelectAvailabilityFtn = function (AuthedService, DashboardService) {
+var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
     var data = {
-        authed: {},
-        dashboard: {}
+        user: '',
+        possibleAvailabilities: [],
+        availabilityBool: false,
+        showProgress: false
     };
 
     return {
@@ -16,22 +18,22 @@ var SelectAvailabilityFtn = function (AuthedService, DashboardService) {
         },
         link: function(scope, element, attr) {
             scope.data = data;
-            DashboardService.apiGetPossibleAvailabilities(null, null, false);
+            AvailabilityManager.apiGetPossibleAvailabilities(null, null, false);
 
-            scope.data.authed = AuthedService.getData();
-            scope.data.dashboard = DashboardService.getData();
-            scope.availabilityBool = scope.data.authed.user.availability != 0;
+            data.user = UserManager.getData().user;
+            data.possibleAvailabilities = AvailabilityManager.getData().possibleAvailabilities;
+            data.availabilityBool = data.user.getAvailability() != 0;
 
             scope.onAvailabilityChange = function(isSwitch) {
                 if (isSwitch) {
                     // Switch activated
-                    if (scope.availabilityBool) AuthedService.setUserAvailability(1);
-                    else AuthedService.setUserAvailability(0);
+                    if (data.availabilityBool) data.user.setAvailability(1);
+                    else data.user.setAvailability(0);
                 }
                 // Update user
-                scope.showProgress = true;
-                AuthedService.apiUpdateUser(function() {
-                    scope.showProgress = false;
+                data.showProgress = true;
+                UserManager.apiUpdateUser(function() {
+                    data.showProgress = false;
                 }, null);
             };
         }
@@ -39,4 +41,8 @@ var SelectAvailabilityFtn = function (AuthedService, DashboardService) {
 };
 
 var module = angular.module('dashboardModule');
-module.directive('mySelectAvailability', ['AuthedService', 'DashboardService', SelectAvailabilityFtn]);
+module.directive('mySelectAvailability', [
+    'UserManager',
+    'AvailabilityManager',
+    SelectAvailabilityFtn
+]);

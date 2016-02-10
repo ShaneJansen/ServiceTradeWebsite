@@ -2,36 +2,13 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var DashboardServiceFtn = function ($http, MainService) {
-    var DashboardService = {};
-    DashboardService.data = {
-        possibleAvailabilities: ''
-    };
-
-    // Getters and setters
-    DashboardService.getData = function() {
-        return DashboardService.data;
-    };
-
-    // Network requests
-    DashboardService.apiGetPossibleAvailabilities = function (success, failure, reload) {
-        if (DashboardService.data.possibleAvailabilities == '' || reload) {
-            $http({
-                url: MainService.getData().apiUrl + 'user/availabilities',
-                method: 'GET'
-            }).then(function successCallback(response) {
-                console.log('NETWORK: get user availabilities success');
-                DashboardService.data.possibleAvailabilities = response.data;
-                if (success != null) success();
-            }, function errorCallback(response) {
-                console.log('NETWORK: get user availabilities failure');
-                if (failure != null) failure();
-            });
-        }
+var DashboardServiceFtn = function() {
+    var DashboardService = {
+        //
     };
 
     return DashboardService;
 };
 
 var module = angular.module('dashboardModule');
-module.factory('DashboardService', ['$http', 'MainService', DashboardServiceFtn]);
+module.factory('DashboardService', [DashboardServiceFtn]);
