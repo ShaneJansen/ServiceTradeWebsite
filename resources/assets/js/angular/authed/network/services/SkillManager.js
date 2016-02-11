@@ -19,7 +19,7 @@ var SkillFtn = function($http, MainService) {
     /* Network requests */
     SkillManager.apiGetPossibleSkills = function (success, failure, reload) {
         var self = this;
-        if (SkillManager.data.possibleSkills == [] || reload) {
+        if (SkillManager.data.possibleSkills.length == 0 || reload) {
             self.data.possibleSkills = [];
             $http({
                 url: MainService.getData().apiUrl + 'skill/skills',
@@ -27,6 +27,12 @@ var SkillFtn = function($http, MainService) {
             }).then(function successCallback(response) {
                 console.log('NETWORK: get possible skills success');
                 // TODO
+                alert('got skills');
+                /*var i;
+                for (i=0; i<response.data.length; i++) {
+                    self.data.possibleAvailabilities.push(
+                        new Availability(response.data[i]));
+                }*/
                 if (success != null) success();
             }, function errorCallback(response) {
                 console.log('NETWORK: get possible skills failure');

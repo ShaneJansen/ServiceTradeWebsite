@@ -2,7 +2,7 @@
  * Created by Shane Jansen on 2/3/16.
  */
 
-var AddSkillsFtn = function (SkillsService) {
+var AddSkillsFtn = function (SkillManager) {
     var data = {
         currentTabIndex: 0,
         selectedCategory: '',
@@ -23,10 +23,10 @@ var AddSkillsFtn = function (SkillsService) {
         link: function(scope, element, attr) {
             scope.data = data;
             scope.canGoBack = false;
-            SkillsService.apiGetPossibleSkills(null, null, false);
-            SkillsService.setSkillSelections('');
+            SkillManager.apiGetPossibleSkills(null, null, false);
+            //TODO: SkillManager.setSkillSelections('');
 
-            data.skills = SkillsService.getData();
+            data.skills = SkillManager.getData();
 
             scope.backClicked = function() {
                 data.currentTabIndex--;
@@ -53,4 +53,7 @@ var AddSkillsFtn = function (SkillsService) {
 };
 
 var module = angular.module('skillsModule');
-module.directive('mySelectSkills', ['SkillsService', AddSkillsFtn]);
+module.directive('mySelectSkills',[
+    'SkillManager',
+    AddSkillsFtn
+]);

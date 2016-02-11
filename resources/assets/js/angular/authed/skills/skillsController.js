@@ -22,7 +22,7 @@ SkillsController.prototype.setClickHandlers = function (SkillsService) {
     // + Controllers can access selected skills through SkillsService
 };
 
-var module = angular.module('skillsModule', []);
+var module = angular.module('skillsModule', ['skillModule']);
 module.controller('SkillsController', [
     '$scope',
     'AuthedService',
