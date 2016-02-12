@@ -5,13 +5,15 @@
 var AddSkillsFtn = function (SkillManager) {
     var data = {
         currentTabIndex: 0,
+        selectedSkillNames: [],
+
         possibleSkillCategories: [],
         selectedCategory: {},
         selectedSubCategory: {}
     };
 
     function setBackButton(scope) {
-        scope.canGoBack = data.currentTabIndex != 0;
+        data.canGoBack = data.currentTabIndex != 0;
     }
 
     return {
@@ -22,7 +24,7 @@ var AddSkillsFtn = function (SkillManager) {
         },
         link: function(scope, element, attr) {
             scope.data = data;
-            scope.canGoBack = false;
+            data.canGoBack = false;
             SkillManager.apiGetPossibleSkills(null, null, false);
             data.possibleSkillCategories = SkillManager.getData().possibleSkillCategories;
 
@@ -44,6 +46,7 @@ var AddSkillsFtn = function (SkillManager) {
                 if (scope.selectedSkills.indexOf(skill) == -1) {
                     // Skill has not been selected yet
                     scope.selectedSkills.push(skill);
+                    data.selectedSkillNames.push(skill.getName());
                     data.currentTabIndex = 0;
                 }
                 setBackButton(scope);

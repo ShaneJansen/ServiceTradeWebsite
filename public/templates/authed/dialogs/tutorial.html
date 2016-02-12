@@ -2,11 +2,6 @@
     md-tabs-wrapper { display: none; }
     md-dialog-content { max-width: 800px; }
     p { font-size: 1.2em; }
-
-    #step {
-        font-weight: bold;
-        font-size: 1.5em;
-    }
 </style>
 
 <md-dialog aria-label="login dialog" ng-cloak>
@@ -19,7 +14,6 @@
     <md-dialog-content>
         <div class="md-dialog-content">
             <div layout="column" layout-align="center center">
-                <span id="step">Step {{ ctrl.data.currentIndex + 1 }} of {{ ctrl.data.maxIndex + 1 }}</span>
                 <md-tabs md-dynamic-height md-border-bottom md-selected="ctrl.data.currentIndex">
                     <md-tab label="one">
                         <md-content class="md-padding">
@@ -57,7 +51,7 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-        <md-button ng-click="ctrl.previous()">
+        <md-button ng-click="ctrl.previous()" ng-hide="ctrl.data.currentIndex == 0">
             Previous Step
         </md-button>
         <span flex></span>
