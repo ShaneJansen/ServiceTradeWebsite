@@ -29,5 +29,5 @@ var AuthedServiceFtn = function () {
     return AuthedService;
 };
 
-var module = angular.module('authedModule');
+var module = angular.module('authedControllerModule');
 module.factory('AuthedService', ['$http', 'MainService', AuthedServiceFtn]);

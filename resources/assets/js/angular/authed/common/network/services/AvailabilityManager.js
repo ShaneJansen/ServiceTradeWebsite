@@ -24,7 +24,7 @@ var AvailabilityFtn = function($http, MainService, Availability) {
                 url: MainService.getData().apiUrl + 'user/availabilities',
                 method: 'GET'
             }).then(function successCallback(response) {
-                console.log('NETWORK: get user availabilities success');
+                console.log('NETWORK: get possible availabilities success');
                 var i;
                 for (i=0; i<response.data.length; i++) {
                     self.data.possibleAvailabilities.push(
@@ -32,7 +32,7 @@ var AvailabilityFtn = function($http, MainService, Availability) {
                 }
                 if (success != null) success();
             }, function errorCallback(response) {
-                console.log('NETWORK: get user availabilities failure');
+                console.log('NETWORK: get possible availabilities failure');
                 if (failure != null) failure();
             });
         }

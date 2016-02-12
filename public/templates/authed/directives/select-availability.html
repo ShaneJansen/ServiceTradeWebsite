@@ -1,31 +1,31 @@
-<md-switch class="md-primary" ng-model="availabilityBool" ng-change="onAvailabilityChange(true)">
+<md-switch class="md-primary" ng-model="data.availabilityBool" ng-change="onAvailabilityChange(true)">
     <div layout="row" layout-align="center center">
         <div>
-            <span ng-hide="availabilityBool">Not </span>Available for Jobs
+            <span ng-hide="data.availabilityBool">Not </span>Available for Jobs
             <br>
-            <span class="input-error" ng-hide="availabilityBool">You can still request jobs, but you will not be selected for job offers.</span>
+            <span class="input-error" ng-hide="data.availabilityBool">You can still request jobs, but you will not be selected for job offers.</span>
         </div>
-        <md-progress-circular ng-show="showProgress" md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular ng-show="data.showProgress" md-mode="indeterminate"></md-progress-circular>
     </div>
 </md-switch>
-<div class="animate-hide" ng-hide="!availabilityBool">
+<div class="animate-hide" ng-hide="!data.availabilityBool">
     <md-input-container>
         <label>Frequency</label>
-        <md-select ng-model="data.user.availability" ng-change="onAvailabilityChange(false)">
+        <md-select ng-model="data.selectedAvailability" ng-change="onAvailabilityChange(false)">
             <md-optgroup label="Weekly">
-                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'weekly'}"
+                <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'weekly'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Monthly">
-                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'monthly'}"
+                <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'monthly'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Always">
-                <md-option ng-repeat="availability in data.dashboard.possibleAvailabilities | filter: {codeType: 'always'}"
+                <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'always'}"
                            value="{{ availability.code }}">
                     {{ availability.decoded }}
                 </md-option>

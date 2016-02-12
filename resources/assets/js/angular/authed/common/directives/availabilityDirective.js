@@ -4,8 +4,8 @@
 
 var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
     var data = {
-        user: '',
         possibleAvailabilities: [],
+        selectedAvailability: 0,
         availabilityBool: false,
         showProgress: false
     };
@@ -18,18 +18,19 @@ var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
         },
         link: function(scope, element, attr) {
             scope.data = data;
+            data.selectedAvailability = UserManager.getData().user.getAvailability();
             AvailabilityManager.apiGetPossibleAvailabilities(null, null, false);
-
-            data.user = UserManager.getData().user;
             data.possibleAvailabilities = AvailabilityManager.getData().possibleAvailabilities;
-            data.availabilityBool = data.user.getAvailability() != 0;
+            data.availabilityBool = data.selectedAvailability != 0;
 
             scope.onAvailabilityChange = function(isSwitch) {
                 if (isSwitch) {
                     // Switch activated
-                    if (data.availabilityBool) data.user.setAvailability(1);
-                    else data.user.setAvailability(0);
+                    if (data.availabilityBool) UserManager.getData().user.setAvailability(1);
+                    else UserManager.getData().user.setAvailability(0);
+                    data.selectedAvailability = UserManager.getData().user.getAvailability();
                 }
+                else UserManager.getData().user.setAvailability(data.selectedAvailability);
                 // Update user
                 data.showProgress = true;
                 UserManager.apiUpdateUser(function() {
@@ -40,7 +41,7 @@ var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
     };
 };
 
-var module = angular.module('dashboardModule');
+var module = angular.module('availabilityModule');
 module.directive('mySelectAvailability', [
     'UserManager',
     'AvailabilityManager',

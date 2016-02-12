@@ -44,7 +44,8 @@ var TutorialController = function ($mdDialog, MainService) {
     self.data = {
         appName: MainService.data.appName,
         currentIndex: 0,
-        maxIndex: 2
+        maxIndex: 2,
+        selectedSkills: []
     };
     self.previous = function () {
         if (self.data.currentIndex > 0) {
@@ -53,6 +54,11 @@ var TutorialController = function ($mdDialog, MainService) {
     };
     self.next = function () {
         if (self.data.currentIndex < self.data.maxIndex) {
+            if (self.data.currentIndex == 1) {
+                // Skills were chosen
+                //alert(JSON.stringify(self.data.selectedSkills));
+                // TODO: loop skills; extract ids; update user skills API call
+            }
             self.data.currentIndex++;
         }
         else {
@@ -61,7 +67,7 @@ var TutorialController = function ($mdDialog, MainService) {
     }
 };
 
-var module = angular.module('authedModule', ['ngCookies', 'userModule']);
+var module = angular.module('authedControllerModule', ['ngCookies', 'userModule']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',

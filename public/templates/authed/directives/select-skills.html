@@ -17,12 +17,12 @@
                     md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
                     md-row-height-gt-md="1:1" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px">
-                <md-grid-tile ng-repeat="category in data.skills.possibleSkills">
+                <md-grid-tile ng-repeat="category in data.possibleSkillCategories">
                     <i class="material-icons md-light" ng-click="categoryClicked(category)">
-                        {{ category.icon }}
+                        {{ category.getIcon() }}
                     </i>
                     <md-grid-tile-footer>
-                        <h3>{{ category.name }}</h3>
+                        <h3>{{ category.getName() }}</h3>
                     </md-grid-tile-footer>
                 </md-grid-tile>
             </md-grid-list>
@@ -35,12 +35,12 @@
                     md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="4"
                     md-row-height-gt-md="1:1" md-row-height="2:2"
                     md-gutter="12px" md-gutter-gt-sm="8px">
-                <md-grid-tile ng-repeat="subCategory in data.selectedCategory.skillSubCategories">
+                <md-grid-tile ng-repeat="subCategory in data.selectedCategory.getSkillSubCategories()">
                     <i class="material-icons md-light" ng-click="subCategoryClicked(subCategory)">
-                        {{ subCategory.icon }}
+                        {{ subCategory.getIcon() }}
                     </i>
                     <md-grid-tile-footer>
-                        <h3>{{ subCategory.name }}</h3>
+                        <h3>{{ subCategory.getName() }}</h3>
                     </md-grid-tile-footer>
                 </md-grid-tile>
             </md-grid-list>
@@ -50,9 +50,9 @@
         <md-content>
             <h2>Select a skill:</h2>
             <md-list>
-                <md-list-item class="md-1-line" ng-repeat="skill in data.selectedSubCategory.skills">
+                <md-list-item class="md-1-line" ng-repeat="skill in data.selectedSubCategory.getSkills()">
                     <div class="md-list-item-text">
-                        <h3>{{skill.name}}</h3>
+                        <h3>{{ skill.getName() }}</h3>
                     </div>
                     <md-button class="md-secondary" ng-click="skillClicked(skill)">Select</md-button>
                     <md-divider ng-if="!$last"></md-divider>

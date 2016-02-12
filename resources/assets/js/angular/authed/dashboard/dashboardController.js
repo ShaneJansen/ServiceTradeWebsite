@@ -14,7 +14,7 @@ DashboardController.prototype.initialize = function ($scope, AuthedService) {
     });
 };
 
-var module = angular.module('dashboardModule', ['availabilityModule']);
+var module = angular.module('dashboardControllerModule', ['availabilityModule']);
 module.controller('DashboardController', [
     '$scope',
     'AuthedService',

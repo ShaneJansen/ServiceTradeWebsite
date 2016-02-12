@@ -2,11 +2,11 @@
  * Created by Shane Jansen on 2/10/16.
  */
 
-var SkillFtn = function($http, MainService) {
+var SkillFtn = function($http, MainService, SkillCategory) {
     var SkillManager = {
         data: {
-            userSkill: [],
-            possibleSkills: []
+            userSkills: [],
+            possibleSkillCategories: []
         }
     };
 
@@ -19,20 +19,18 @@ var SkillFtn = function($http, MainService) {
     /* Network requests */
     SkillManager.apiGetPossibleSkills = function (success, failure, reload) {
         var self = this;
-        if (SkillManager.data.possibleSkills.length == 0 || reload) {
-            self.data.possibleSkills = [];
+        if (SkillManager.data.possibleSkillCategories.length == 0 || reload) {
+            self.data.possibleSkillCategories = [];
             $http({
                 url: MainService.getData().apiUrl + 'skill/skills',
                 method: 'GET'
             }).then(function successCallback(response) {
                 console.log('NETWORK: get possible skills success');
-                // TODO
-                alert('got skills');
-                /*var i;
+                var i;
                 for (i=0; i<response.data.length; i++) {
-                    self.data.possibleAvailabilities.push(
-                        new Availability(response.data[i]));
-                }*/
+                    self.data.possibleSkillCategories.push(
+                        new SkillCategory(response.data[i]));
+                }
                 if (success != null) success();
             }, function errorCallback(response) {
                 console.log('NETWORK: get possible skills failure');
@@ -48,5 +46,6 @@ var module = angular.module('skillModule', []);
 module.factory('SkillManager', [
     '$http',
     'MainService',
+    'SkillCategory',
     SkillFtn
 ]);

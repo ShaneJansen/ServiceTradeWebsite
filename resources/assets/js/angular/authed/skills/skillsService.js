@@ -10,5 +10,5 @@ var SkillsServiceFtn = function() {
     return SkillsService;
 };
 
-var module = angular.module('skillsModule');
+var module = angular.module('skillsControllerModule');
 module.factory('SkillsService', [SkillsServiceFtn]);

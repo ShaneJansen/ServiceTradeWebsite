@@ -10,5 +10,5 @@ var DashboardServiceFtn = function() {
     return DashboardService;
 };
 
-var module = angular.module('dashboardModule');
+var module = angular.module('dashboardControllerModule');
 module.factory('DashboardService', [DashboardServiceFtn]);

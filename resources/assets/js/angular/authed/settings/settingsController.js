@@ -16,7 +16,7 @@ SettingsController.prototype.initialize = function ($scope, AuthedService) {
     });
 };
 
-var module = angular.module('settingsModule', []);
+var module = angular.module('settingsControllerModule', []);
 module.controller('SettingsController', [
     '$scope',
     'AuthedService',

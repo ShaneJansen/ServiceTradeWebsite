@@ -5,9 +5,9 @@
 var AddSkillsFtn = function (SkillManager) {
     var data = {
         currentTabIndex: 0,
-        selectedCategory: '',
-        selectedSubCategory: '',
-        selectedSkill: ''
+        possibleSkillCategories: [],
+        selectedCategory: {},
+        selectedSubCategory: {}
     };
 
     function setBackButton(scope) {
@@ -18,15 +18,13 @@ var AddSkillsFtn = function (SkillManager) {
         restrict: 'E',
         templateUrl: '/templates/authed/directives/select-skills.html',
         scope: {
-
+            selectedSkills: '='
         },
         link: function(scope, element, attr) {
             scope.data = data;
             scope.canGoBack = false;
             SkillManager.apiGetPossibleSkills(null, null, false);
-            //TODO: SkillManager.setSkillSelections('');
-
-            data.skills = SkillManager.getData();
+            data.possibleSkillCategories = SkillManager.getData().possibleSkillCategories;
 
             scope.backClicked = function() {
                 data.currentTabIndex--;
@@ -43,16 +41,18 @@ var AddSkillsFtn = function (SkillManager) {
                 setBackButton(scope);
             };
             scope.skillClicked = function(skill) {
-                data.selectedSkill = skill;
-                // TODO: save the skill to the user's account
-                data.currentTabIndex = 0;
+                if (scope.selectedSkills.indexOf(skill) == -1) {
+                    // Skill has not been selected yet
+                    scope.selectedSkills.push(skill);
+                    data.currentTabIndex = 0;
+                }
                 setBackButton(scope);
             };
         }
     };
 };
 
-var module = angular.module('skillsModule');
+var module = angular.module('skillModule');
 module.directive('mySelectSkills',[
     'SkillManager',
     AddSkillsFtn

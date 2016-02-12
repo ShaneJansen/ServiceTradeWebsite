@@ -5,7 +5,7 @@
 var UserFtn = function($cookies, $http, MainService, User) {
     var UserManager = {
         data: {
-            user: ''
+            user: {}
         }
     };
 
@@ -24,7 +24,8 @@ var UserFtn = function($cookies, $http, MainService, User) {
             data: self.data.user
         }).then(function successCallback(response) {
             console.log('NETWORK: update user success');
-            self.data.user = response.data;
+            self.data.user = new User(response.data);
+            self.updateUserData();
             if(success != null) success();
         }, function errorCallback(response) {
             console.log('NETWORK: update user failure');
@@ -47,6 +48,10 @@ var UserFtn = function($cookies, $http, MainService, User) {
             firstLogin: creds.firstLogin
         };
         self.data.user = new User(data);
+    };
+    UserManager.updateUserData = function() {
+        var self = this;
+        $cookies.put('userCreds', JSON.stringify(self.data.user));
     };
     UserManager.forgetStoredData = function() {
         var cookies = $cookies.getAll();

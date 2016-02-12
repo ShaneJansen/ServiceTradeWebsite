@@ -38,9 +38,19 @@ gulp.task('unauthed-js:watch', function () {
 
 
 gulp.task('authed-js', function () {
+    //return gulp.src(['resources/assets/js/angular/authedApp.js',
+    //    'resources/assets/js/angular/main/**/*.js',
+    //    'resources/assets/js/angular/authed/**/*.js'])
     return gulp.src(['resources/assets/js/angular/authedApp.js',
             'resources/assets/js/angular/main/**/*.js',
-            'resources/assets/js/angular/authed/**/*.js'])
+            'resources/assets/js/angular/authed/common/network/services/*.js',
+            'resources/assets/js/angular/authed/common/network/models/*.js',
+            'resources/assets/js/angular/authed/common/directives/*.js',
+            'resources/assets/js/angular/authed/dashboard/*.js',
+            'resources/assets/js/angular/authed/settings/*.js',
+            'resources/assets/js/angular/authed/skills/*.js',
+            'resources/assets/js/angular/authed/authedController.js',
+            'resources/assets/js/angular/authed/authedService.js'])
         .pipe(gp_if(argv.dev, gp_sourcemaps.init()))
         .pipe(gp_concat('authed.js'))
         .pipe(gp_uglify())
