@@ -21,7 +21,7 @@ var AvailabilityFtn = function($http, MainService, Availability) {
         if (self.data.possibleAvailabilities.length == 0 || reload) {
             self.data.possibleAvailabilities = [];
             $http({
-                url: MainService.getData().apiUrl + 'user/availabilities',
+                url: MainService.getData().apiUrl + 'availabilities',
                 method: 'GET'
             }).then(function successCallback(response) {
                 console.log('NETWORK: get possible availabilities success');

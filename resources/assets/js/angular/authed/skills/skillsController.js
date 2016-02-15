@@ -4,12 +4,10 @@
 
 var SkillsController = function ($scope, AuthedService) {
     var self = this;
-
     self.initialize($scope, AuthedService);
 };
 SkillsController.prototype.initialize = function ($scope, AuthedService) {
     var self = this;
-
     $scope.$on("$routeChangeSuccess", function($currentRoute, $previousRoute) {
         AuthedService.setToolbarTitle('Skills');
     });

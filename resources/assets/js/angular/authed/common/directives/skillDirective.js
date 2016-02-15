@@ -2,7 +2,7 @@
  * Created by Shane Jansen on 2/3/16.
  */
 
-var AddSkillsFtn = function (SkillManager) {
+var SkillSelectorFtn = function (SkillManager) {
     var data = {
         currentTabIndex: 0,
         selectedSkillNames: [],
@@ -20,7 +20,7 @@ var AddSkillsFtn = function (SkillManager) {
         restrict: 'E',
         templateUrl: '/templates/authed/directives/select-skills.html',
         scope: {
-            selectedSkills: '='
+            selectedSkillIds: '='
         },
         link: function(scope, element, attr) {
             scope.data = data;
@@ -43,9 +43,9 @@ var AddSkillsFtn = function (SkillManager) {
                 setBackButton(scope);
             };
             scope.skillClicked = function(skill) {
-                if (scope.selectedSkills.indexOf(skill) == -1) {
+                if (scope.selectedSkillIds.indexOf(skill.getId()) == -1) {
                     // Skill has not been selected yet
-                    scope.selectedSkills.push(skill);
+                    scope.selectedSkillIds.push(skill.getId());
                     data.selectedSkillNames.push(skill.getName());
                     data.currentTabIndex = 0;
                 }
@@ -55,8 +55,31 @@ var AddSkillsFtn = function (SkillManager) {
     };
 };
 
+var UserSkillsFtn = function (SkillManager) {
+    var data = {
+        userSkills: []
+    };
+
+    return {
+        restrict: 'E',
+        templateUrl: '/templates/authed/directives/user-skills.html',
+        scope: {
+            //
+        },
+        link: function(scope, element, attr) {
+            scope.data = data;
+            SkillManager.apiGetUserSkills(null, null, false);
+            data.userSkills = SkillManager.getData().userSkills;
+        }
+    };
+};
+
 var module = angular.module('skillModule');
 module.directive('mySelectSkills',[
     'SkillManager',
-    AddSkillsFtn
+    SkillSelectorFtn
+]);
+module.directive('myUserSkills', [
+    'SkillManager',
+    UserSkillsFtn
 ]);
