@@ -1,0 +1,32 @@
+<style>
+    md-dialog-content { max-width: 800px; }
+    p { font-size: 1.2em; }
+</style>
+
+<md-dialog aria-label="add skills dialog" ng-cloak>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add Skills</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="ctrl.cancel()">
+                <i class="material-icons">close</i>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <my-select-skills selected-skill-ids="ctrl.data.selectedSkillIds"></my-select-skills>
+            <p style="visibility: hidden">
+                hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden
+                hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden hidden
+            </p>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-progress-circular ng-show="ctrl.data.showProgress" md-mode="indeterminate"></md-progress-circular>
+        <md-button ng-click="ctrl.addSkills()" style="margin-right:20px;">
+            Add Skills
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

@@ -19,7 +19,7 @@ var AvailabilityFtn = function($http, MainService, Availability) {
     AvailabilityManager.apiGetPossibleAvailabilities = function (success, failure, reload) {
         var self = this;
         if (self.data.possibleAvailabilities.length == 0 || reload) {
-            self.data.possibleAvailabilities = [];
+            self.data.possibleAvailabilities.length = 0;
             $http({
                 url: MainService.getData().apiUrl + 'availabilities',
                 method: 'GET'

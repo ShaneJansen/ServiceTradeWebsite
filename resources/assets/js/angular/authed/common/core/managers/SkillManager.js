@@ -20,7 +20,7 @@ var SkillFtn = function($http, MainService, SkillCategory, Skill) {
     SkillManager.apiGetPossibleSkills = function (success, failure, reload) {
         var self = this;
         if (SkillManager.data.possibleSkillCategories.length == 0 || reload) {
-            self.data.possibleSkillCategories = [];
+            self.data.possibleSkillCategories.length = 0;
             $http({
                 url: MainService.getData().apiUrl + 'skill',
                 method: 'GET'
@@ -41,7 +41,7 @@ var SkillFtn = function($http, MainService, SkillCategory, Skill) {
     SkillManager.apiGetUserSkills = function (success, failure, reload) {
         var self = this;
         if (SkillManager.data.userSkills.length == 0 || reload) {
-            self.data.userSkills = [];
+            self.data.userSkills.length = 0;
             $http({
                 url: MainService.getData().apiUrl + 'user/skill',
                 method: 'GET'
@@ -61,7 +61,7 @@ var SkillFtn = function($http, MainService, SkillCategory, Skill) {
     };
     SkillManager.apiAddUserSkills = function (skillIds, success, failure) {
         var self = this;
-        self.data.userSkills = [];
+        self.data.userSkills.length = 0;
         $http({
             url: MainService.getData().apiUrl + 'user/skill',
             method: 'POST',

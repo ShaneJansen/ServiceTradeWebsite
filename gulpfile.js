@@ -43,9 +43,8 @@ gulp.task('authed-js', function () {
     //    'resources/assets/js/angular/authed/**/*.js'])
     return gulp.src(['resources/assets/js/angular/authedApp.js',
             'resources/assets/js/angular/main/**/*.js',
-            'resources/assets/js/angular/authed/common/network/services/*.js',
-            'resources/assets/js/angular/authed/common/network/models/*.js',
-            'resources/assets/js/angular/authed/common/directives/*.js',
+            'resources/assets/js/angular/authed/common/core/**/*.js',
+            'resources/assets/js/angular/authed/common/dependents/**/*.js',
             'resources/assets/js/angular/authed/dashboard/*.js',
             'resources/assets/js/angular/authed/settings/*.js',
             'resources/assets/js/angular/authed/skills/*.js',

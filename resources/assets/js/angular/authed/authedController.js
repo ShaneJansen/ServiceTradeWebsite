@@ -2,12 +2,12 @@
  * Created by Shane Jansen on 1/13/16.
  */
 
-var AuthedController = function($window, $cookies, $mdDialog, $http, AuthedService, UserManager) {
+var AuthedController = function($window, $cookies, $http, AuthedService, UserManager, DialogManager) {
     var self = this;
-    self.initialize($window, $cookies, $mdDialog, $http, AuthedService, UserManager);
+    self.initialize($window, $cookies, $http, AuthedService, UserManager, DialogManager);
     self.setClickHandlers($window, $cookies, UserManager);
 };
-AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, $http, AuthedService, UserManager) {
+AuthedController.prototype.initialize = function ($window, $cookies, $http, AuthedService, UserManager, DialogManager) {
     var self = this;
     // Check if cookies are set
     if ($cookies.get('userCreds') == undefined) {
@@ -23,8 +23,8 @@ AuthedController.prototype.initialize = function ($window, $cookies, $mdDialog, 
     $http.defaults.headers.common['X-AUTH-TOKEN'] = self.data.user.getToken();
 
     // Check for first login
-    if (self.data.user.getFirstLogin() == 0) {
-        AuthedService.showTutorialDialog($mdDialog);
+    if (self.data.user.getFirstLogin() == 1) {
+        DialogManager.showTutorialDialog();
     }
 };
 AuthedController.prototype.setClickHandlers = function ($window, $cookies, UserManager) {
@@ -35,49 +35,13 @@ AuthedController.prototype.setClickHandlers = function ($window, $cookies, UserM
     };
 };
 
-var TutorialController = function ($mdDialog, MainService, SkillManager) {
-    var self = this;
-    self.data = {
-        appName: MainService.data.appName,
-        currentIndex: 0,
-        maxIndex: 2,
-        selectedSkillIds: []
-    };
-
-    self.previous = function () {
-        if (self.data.currentIndex > 0) {
-            self.data.currentIndex--;
-        }
-    };
-    self.next = function () {
-        if (self.data.currentIndex < self.data.maxIndex) {
-            if (self.data.currentIndex == 1) {
-                // Skills were chosen
-                if (self.data.selectedSkillIds.length != 0) {
-                    SkillManager.apiAddUserSkills(self.data.selectedSkillIds, null, null);
-                }
-            }
-            self.data.currentIndex++;
-        }
-        else {
-            $mdDialog.cancel();
-        }
-    }
-};
-
-var module = angular.module('authedControllerModule', ['ngCookies', 'userModule', 'skillModule']);
+var module = angular.module('authedControllerModule', ['ngCookies', 'userModule', 'skillModule', 'dialogModule']);
 module.controller('AuthedController', [
     '$window',
     '$cookies',
-    '$mdDialog',
     '$http',
     'AuthedService',
     'UserManager',
+    'DialogManager',
     AuthedController
-]);
-module.controller('TutorialController', [
-    '$mdDialog',
-    'MainService',
-    'SkillManager',
-    TutorialController
 ]);
