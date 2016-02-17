@@ -21,7 +21,7 @@ var DialogFtn = function($mdDialog) {
             controllerAs: 'ctrl',
             templateUrl: 'templates/authed/dialogs/add-skills.html',
             parent: angular.element(document.body),
-            clickOutsideToClose: true
+            clickOutsideToClose: false
         });
     };
 

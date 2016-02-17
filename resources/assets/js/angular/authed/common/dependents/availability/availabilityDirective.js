@@ -3,13 +3,6 @@
  */
 
 var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
-    var data = {
-        possibleAvailabilities: [],
-        selectedAvailability: 0,
-        availabilityBool: false,
-        showProgress: false
-    };
-
     return {
         restrict: 'E',
         templateUrl: '/templates/authed/directives/select-availability.html',
@@ -17,12 +10,21 @@ var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
 
         },
         link: function(scope, element, attr) {
+            var data = {
+                possibleAvailabilities: [],
+                selectedAvailability: 0,
+                availabilityBool: false,
+                showProgress: false
+            };
+
+            // Initialize
             scope.data = data;
             data.selectedAvailability = UserManager.getData().user.getAvailability();
             AvailabilityManager.apiGetPossibleAvailabilities(null, null, false);
             data.possibleAvailabilities = AvailabilityManager.getData().possibleAvailabilities;
             data.availabilityBool = data.selectedAvailability != 0;
 
+            // Click listeners
             scope.onAvailabilityChange = function(isSwitch) {
                 if (isSwitch) {
                     // Switch activated
