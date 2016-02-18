@@ -14,6 +14,9 @@ SkillsController.prototype.initialize = function ($scope, AuthedService, DialogM
     self.addSkillsClicked = function() {
         DialogManager.showAddSkillsDialog();
     };
+    self.removeSkill = function (skillId) {
+        // TODO: popup confirm dialog and remove skill
+    };
 };
 
 var module = angular.module('skillsControllerModule', ['skillModule', 'dialogModule']);

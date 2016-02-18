@@ -72,7 +72,7 @@ var UserSkillsFtn = function (SkillManager) {
         templateUrl: '/templates/authed/directives/user-skills.html',
         scope: {
             itemText: '@',
-            skillSelected: '&' // TODO
+            skillSelected: '&'
         },
         link: function(scope, element, attr) {
             var data = {
