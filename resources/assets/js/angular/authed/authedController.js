@@ -14,9 +14,10 @@ AuthedController.prototype.initialize = function ($window, $cookies, $http, Auth
         $window.location.href = '/';
     }
 
-    // Load and set user data
+    // Load and set data
+    self.data = AuthedService.getData();
     UserManager.loadUserData();
-    self.data = UserManager.getData();
+    self.data.user = UserManager.getData().user;
 
     // Set the default http headers
     $http.defaults.headers.common['X-USER-ID'] = self.data.user.getId();

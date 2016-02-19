@@ -81,6 +81,26 @@ var SkillFtn = function($http, MainService, SkillCategory, Skill) {
             if (failure != null) failure();
         });
     };
+    SkillManager.apiRemoveUserSkill = function (skillId, success, failure) {
+        var self = this;
+        // Remove skill from data
+        var i;
+        for (i=0; i<self.data.userSkills.length; i++) {
+            if (self.data.userSkills[i].id == skillId) {
+                self.data.userSkills.splice(i, 1);
+            }
+        }
+        $http({
+            url: MainService.getData().apiUrl + 'user/skill/' + skillId,
+            method: 'DELETE'
+        }).then(function successCallback(response) {
+            console.log('NETWORK: remove user skill success');
+            if (success != null) success();
+        }, function errorCallback(response) {
+            console.log('NETWORK: remove user skill failure');
+            if (failure != null) failure();
+        });
+    };
 
     return SkillManager;
 };

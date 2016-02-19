@@ -9,6 +9,11 @@ var AuthedServiceFtn = function () {
         }
     };
 
+    /* Getters */
+    AuthedService.getData = function() {
+        var self = this;
+        return self.data;
+    };
     /* Setters */
     AuthedService.setToolbarTitle = function(toolbarTitle) {
         var self = this;
