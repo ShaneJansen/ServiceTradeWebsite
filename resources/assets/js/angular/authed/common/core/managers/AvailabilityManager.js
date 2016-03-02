@@ -5,7 +5,8 @@
 var AvailabilityFtn = function($http, MainService, Availability) {
     var AvailabilityManager = {
         data: {
-            possibleAvailabilities: []
+            possibleAvailabilities: [],
+            apiGetPossibleAvailabilitiesReq: false
         }
     };
 
@@ -16,15 +17,18 @@ var AvailabilityFtn = function($http, MainService, Availability) {
     };
 
     /* Network requests */
+    // TODO: Extract API calls into a generic method (see static vars in javascript)
     AvailabilityManager.apiGetPossibleAvailabilities = function (success, failure, reload) {
         var self = this;
-        if (self.data.possibleAvailabilities.length == 0 || reload) {
+        if (!self.data.apiGetPossibleAvailabilitiesReq && self.data.possibleAvailabilities.length == 0 || reload) {
+            self.data.apiGetPossibleAvailabilitiesReq = true;
             self.data.possibleAvailabilities.length = 0;
             $http({
                 url: MainService.getData().apiUrl + 'availabilities',
                 method: 'GET'
             }).then(function successCallback(response) {
                 console.log('NETWORK: get possible availabilities success');
+                self.data.apiGetPossibleAvailabilitiesReq = false;
                 var i;
                 for (i=0; i<response.data.length; i++) {
                     self.data.possibleAvailabilities.push(
@@ -33,6 +37,7 @@ var AvailabilityFtn = function($http, MainService, Availability) {
                 if (success != null) success();
             }, function errorCallback(response) {
                 console.log('NETWORK: get possible availabilities failure');
+                self.data.apiGetPossibleAvailabilitiesReq = false;
                 if (failure != null) failure();
             });
         }

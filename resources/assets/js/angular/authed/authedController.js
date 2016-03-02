@@ -24,7 +24,7 @@ AuthedController.prototype.initialize = function ($window, $cookies, $http, Auth
     $http.defaults.headers.common['X-AUTH-TOKEN'] = self.data.user.getToken();
 
     // Check for first login
-    if (self.data.user.getFirstLogin() == 1) {
+    if (self.data.user.getFirstLogin() == 0) {
         DialogManager.showTutorialDialog();
     }
 };

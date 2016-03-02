@@ -11,22 +11,22 @@
 <div class="animate-hide" ng-hide="!data.availabilityBool">
     <md-input-container>
         <label>Frequency</label>
-        <md-select ng-model="data.selectedAvailability" ng-change="onAvailabilityChange(false)">
+        <md-select ng-model="data.user.availability" ng-change="onAvailabilityChange(false)">
             <md-optgroup label="Weekly">
                 <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'weekly'}"
-                           value="{{ availability.code }}">
+                           ng-value="availability.code">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Monthly">
                 <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'monthly'}"
-                           value="{{ availability.code }}">
+                           ng-value="availability.code">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>
             <md-optgroup label="Always">
                 <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'always'}"
-                           value="{{ availability.code }}">
+                           ng-value="availability.code">
                     {{ availability.decoded }}
                 </md-option>
             </md-optgroup>

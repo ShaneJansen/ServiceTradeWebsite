@@ -7,7 +7,7 @@ var TutorialController = function ($mdDialog, MainService, SkillManager) {
     self.data = {
         appName: MainService.data.appName,
         currentIndex: 0,
-        maxIndex: 2,
+        maxIndex: 3,
         selectedSkillIds: []
     };
 
@@ -17,18 +17,17 @@ var TutorialController = function ($mdDialog, MainService, SkillManager) {
         }
     };
     self.next = function () {
-        if (self.data.currentIndex < self.data.maxIndex) {
-            if (self.data.currentIndex == 1) {
-                // Skills were chosen
-                if (self.data.selectedSkillIds.length != 0) {
-                    SkillManager.apiAddUserSkills(self.data.selectedSkillIds, null, null);
-                }
+        if (self.data.currentIndex == 1) {
+            // Skills were chosen
+            if (self.data.selectedSkillIds.length != 0) {
+                SkillManager.apiAddUserSkills(self.data.selectedSkillIds, null, null);
             }
-            self.data.currentIndex++;
         }
-        else {
+        else if (self.data.currentIndex == self.data.maxIndex) {
+            // Final tab
             $mdDialog.cancel();
         }
+        self.data.currentIndex++;
     }
 };
 
