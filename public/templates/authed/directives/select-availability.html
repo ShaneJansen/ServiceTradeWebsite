@@ -1,14 +1,17 @@
-<md-switch class="md-primary" ng-model="data.availabilityBool" ng-change="onAvailabilityChange(true)">
+{{ staticData }}
+{{ data.user.availability }}
+
+<md-switch class="md-primary" ng-model="staticData.availabilityBool" ng-change="onAvailabilityChange(true)">
     <div layout="row" layout-align="center center">
         <div>
-            <span ng-hide="data.availabilityBool">Not </span>Available for Jobs
+            <span ng-hide="staticData.availabilityBool">Not </span>Available for Jobs
             <br>
-            <span class="input-error" ng-hide="data.availabilityBool">You can still request jobs, but you will not be selected for job offers.</span>
+            <span class="input-error" ng-hide="staticData.availabilityBool">You can still request jobs, but you will not be selected for job offers.</span>
         </div>
         <md-progress-circular ng-show="data.showProgress" md-mode="indeterminate"></md-progress-circular>
     </div>
 </md-switch>
-<div class="animate-hide" ng-hide="!data.availabilityBool">
+<div class="animate-hide" ng-hide="!staticData.availabilityBool">
     <md-input-container>
         <label>Frequency</label>
         <md-select ng-model="data.user.availability" ng-change="onAvailabilityChange(false)">

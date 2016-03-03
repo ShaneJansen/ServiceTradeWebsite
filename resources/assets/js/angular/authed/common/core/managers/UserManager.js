@@ -18,6 +18,7 @@ var UserFtn = function($cookies, $http, MainService, User) {
     /* Network requests */
     UserManager.apiUpdateUser = function(success, failure) {
         var self = this;
+        console.log(self.data.user.availability);
         $http({
             url: MainService.getData().apiUrl + 'user',
             method: 'PUT',
