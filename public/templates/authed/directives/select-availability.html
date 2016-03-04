@@ -1,6 +1,3 @@
-{{ staticData }}
-{{ data.user.availability }}
-
 <md-switch class="md-primary" ng-model="staticData.availabilityBool" ng-change="onAvailabilityChange(true)">
     <div layout="row" layout-align="center center">
         <div>
@@ -14,7 +11,7 @@
 <div class="animate-hide" ng-hide="!staticData.availabilityBool">
     <md-input-container>
         <label>Frequency</label>
-        <md-select ng-model="data.user.availability" ng-change="onAvailabilityChange(false)">
+        <md-select ng-model="data.userManager.user.availability" ng-change="onAvailabilityChange(false)">
             <md-optgroup label="Weekly">
                 <md-option ng-repeat="availability in data.possibleAvailabilities | filter: {codeType: 'weekly'}"
                            ng-value="availability.code">

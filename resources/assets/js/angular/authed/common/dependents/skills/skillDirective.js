@@ -13,6 +13,7 @@ var SkillSelectorFtn = function (SkillManager) {
         link: function(scope, element, attr) {
             var data = {
                 currentTabIndex: 0,
+                singleSubCategory: false,
                 selectedSkillNames: [],
 
                 possibleSkillCategories: [],
@@ -35,12 +36,21 @@ var SkillSelectorFtn = function (SkillManager) {
 
             // Click Listeners
             scope.backClicked = function() {
-                data.currentTabIndex--;
+                if (data.singleSubCategory) {
+                    data.singleSubCategory = false;
+                    data.currentTabIndex -= 2;
+                }
+                else data.currentTabIndex--;
                 setBackButton();
             };
             scope.categoryClicked = function(category) {
                 data.selectedCategory = category;
-                data.currentTabIndex++;
+                if (category.skillSubCategories.length == 1) {
+                    data.singleSubCategory = true;
+                    data.selectedSubCategory = category.skillSubCategories[0];
+                    data.currentTabIndex += 2;
+                }
+                else data.currentTabIndex++;
                 setBackButton();
             };
             scope.subCategoryClicked = function(subCategory) {

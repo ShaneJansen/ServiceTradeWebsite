@@ -16,25 +16,24 @@ var SelectAvailabilityFtn = function (UserManager, AvailabilityManager) {
         link: function(scope, element, attr) {
             var data = {
                 possibleAvailabilities: [],
-                user: [],
+                userManager: {},
                 showProgress: false
             };
 
             // Initialize
             scope.data = data;
             scope.staticData = staticData;
-            data.user = UserManager.getData().user;
+            data.userManager = UserManager.getData();
             AvailabilityManager.apiGetPossibleAvailabilities(null, null, false);
             data.possibleAvailabilities = AvailabilityManager.getData().possibleAvailabilities;
-            staticData.availabilityBool = data.user.availability != 0;
+            staticData.availabilityBool = data.userManager.user.getAvailability() != 0;
 
             // Click listeners
             scope.onAvailabilityChange = function(isSwitch) {
                 if (isSwitch) {
                     // Switch activated
-                    if (data.availabilityBool) UserManager.getData().user.setAvailability(1);
-                    else UserManager.getData().user.setAvailability(0);
-                    //data.selectedAvailability = UserManager.getData().user.getAvailability();
+                    if (staticData.availabilityBool) data.userManager.user.setAvailability(1);
+                    else data.userManager.user.setAvailability(0);
                 }
                 // Update user
                 data.showProgress = true;
