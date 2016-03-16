@@ -21,7 +21,7 @@ MainController.prototype.initialize = function($location, MainService) {
     var apiUrl = $location.protocol() + '://api.' +  $location.host() + '/';
 
     MainService.setApiUrl(apiUrl);
-    MainService.setAppName('ServiceTrade');
+    MainService.setAppName('ServiceTrade (Alpha)');
 };
 
 MainController.prototype.setClickHandlers = function($mdSidenav) {
