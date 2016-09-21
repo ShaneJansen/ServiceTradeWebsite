@@ -18,9 +18,10 @@ MainController.prototype.initialize = function($location, MainService) {
     // jQuery no conflict
     //$.noConflict();
 
-    var location = $location.host();
+    /*var location = $location.host();
     location = location.replace("www.", "");
-    var apiUrl = $location.protocol() + '://servicetradeapi.' +  location + '/';
+    var apiUrl = $location.protocol() + '://servicetradeapi.' +  location + '/';*/
+    var apiUrl = "http://servicetradeapi.sjjapps.com/";
 
     MainService.setApiUrl(apiUrl);
     MainService.setAppName('ServiceTrade (Alpha)');
