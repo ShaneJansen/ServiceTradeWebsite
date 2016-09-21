@@ -20,7 +20,7 @@ MainController.prototype.initialize = function($location, MainService) {
 
     var location = $location.host();
     location = location.replace("www.", "");
-    var apiUrl = $location.protocol() + '://api.' +  location + '/';
+    var apiUrl = $location.protocol() + '://servicetradeapi.' +  location + '/';
 
     MainService.setApiUrl(apiUrl);
     MainService.setAppName('ServiceTrade (Alpha)');
