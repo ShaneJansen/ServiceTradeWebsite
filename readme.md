@@ -5,3 +5,5 @@
 This is an AngularJS front-end to a test application used for trading services.
 It is a single-page web app using Angular Material for its UI elements.
 The back-end code can be found here: [ServiceTradeApi](https://github.com/ShaneJansen/ServiceTradeApi)
+
+A live demo of the project can be viewed here: http://servicetrade.sjjapps.com
